@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.accolite.placements.dao.CandidateDaoImpl;
+import com.accolite.placements.models.Candidate;
+
 @RestController
 public class CandidateController {
 	
 
 	    @Autowired
-	    private CandidateDAOImpl candidateDAOImpl;
+	    private CandidateDaoImpl candidateDAOImpl;
 	    
 	    /*** Creating a new Candidate ***/
 	    @RequestMapping(value="/create", method=RequestMethod.POST, 
@@ -38,9 +41,9 @@ public class CandidateController {
 	    /*** Retrieve all Candidates ***/
 	    @RequestMapping(value="/candidates",produces="application/json",
 	            method=RequestMethod.GET)
-	    public List getAllCandidates()
+	    public List<Candidate> getAllCandidates()
 	    {
-	        List candidateList = candidateDAOImpl.getAllCandidates();
+	        List<Candidate> candidateList = candidateDAOImpl.getAllCandidates();
 	        return candidateList;
 	    }
 	    
@@ -59,5 +62,4 @@ public class CandidateController {
 	    {
 	        candidateDAOImpl.deleteCandidate(id);
 	    }
-	}
 }
