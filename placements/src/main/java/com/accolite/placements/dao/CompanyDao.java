@@ -8,11 +8,11 @@ public interface CompanyDao {
 
 	 	public void createCompany(Company company);
 	    
-	    public Company getCompanyById(long id);
+	    public Company getCompanyByName(String name);
 	    public List<Company> getAllCompanys();
 	    
 	    public void updateCompany(Company company);
 	    
-	    public void deleteCompany(long id);
+	    public void deleteCompany(String name);
 	    
 }

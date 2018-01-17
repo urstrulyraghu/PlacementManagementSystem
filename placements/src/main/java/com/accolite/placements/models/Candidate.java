@@ -1,6 +1,8 @@
 package com.accolite.placements.models;
 
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,34 +11,39 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Candidate {
+public class Candidate implements Serializable{
 	
-	@Id
-	@Column(name="idcandidate")
-	@GeneratedValue
-	long idcandidate;
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id	
 	String name;
 	String password;
 	String edQual;
 	double sscPercentage;
 	double intPercentage;
 	double degPercentage;
-	long company;
+//	boolean company;
 	
 	
-	public long getIdcandidate() {
-		return idcandidate;
+	public Candidate() {
+		super();
 	}
-	public void setIdcandidate(long idcandidate) {
-		this.idcandidate = idcandidate;
-	}
+	
+//	public long getIdcandidate() {
+//		return idcandidate;
+//	}
+//	public void setIdcandidate(long idcandidate) {
+//		this.idcandidate = idcandidate;
+//	}
 	public String getName() {
 		return name;
 	}
@@ -73,14 +80,15 @@ public class Candidate {
 	public void setDegPercentage(double degPercentage) {
 		this.degPercentage = degPercentage;
 	}
-	public long getCompany() {
-		return company;
-	}
-	public void setCompany(long company) {
-		this.company = company;
-	}
-	public Candidate(String name, String password, String edQual, double sscPercentage, double intPercentage,
-			double degPercentage, long company) {
+//	public long getCompany() {
+//		return company;
+//	}
+//	public void setCompany(long company) {
+//		this.company = company;
+//	}
+	@JsonCreator
+	public Candidate(@JsonProperty("name") String name,@JsonProperty("password") String password,@JsonProperty("edQual") String edQual,@JsonProperty("sscPercentage") double sscPercentage,@JsonProperty("intPercentage") double intPercentage,
+			@JsonProperty("degPercentage")	double degPercentage) {
 		super();
 		this.name = name;
 		this.password = password;
@@ -88,9 +96,8 @@ public class Candidate {
 		this.sscPercentage = sscPercentage;
 		this.intPercentage = intPercentage;
 		this.degPercentage = degPercentage;
-		this.company = company;
 	}
-	
+
 	
 
 }

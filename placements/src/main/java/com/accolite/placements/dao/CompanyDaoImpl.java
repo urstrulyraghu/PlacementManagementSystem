@@ -23,9 +23,10 @@ public class CompanyDaoImpl implements CompanyDao{
 	        entityManager.persist(Company);
 	    }
 
-	    public Company getCompanyById(long id)
+	    public Company getCompanyByName(String name)
 	    {
-	        return entityManager.find(Company.class,id);
+	    	System.out.println("doaimpl");
+	        return entityManager.find(Company.class,name);
 	    }
 
 	    public List<Company> getAllCompanys()
@@ -38,9 +39,9 @@ public class CompanyDaoImpl implements CompanyDao{
 	        entityManager.merge(Company);
 	    }
 
-	    public void deleteCompany(long id)
+	    public void deleteCompany(String name)
 	    {
-	        Company s = entityManager.find(Company.class,id);
+	        Company s = entityManager.find(Company.class,name);
 	        entityManager.remove(s);
 	    }
 }

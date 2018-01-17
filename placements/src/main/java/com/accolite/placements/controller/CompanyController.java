@@ -23,17 +23,16 @@ public class CompanyController {
             produces="application/json", consumes="application/json")
     public void createCompany(@RequestBody Company company)
     {
-    	System.out.println("******************" + company);
         CompanyDAOImpl.createCompany(company);
     }
     
     /*** Retrieve a single Company ***/
-    @RequestMapping(value="/Company/{id}",produces="application/json",
+    @RequestMapping(value="/Company/{name}",produces="application/json",
             method=RequestMethod.GET)
-    public Company getCompanyById(@PathVariable("id") long id)
+    public Company getCompanyByName(@PathVariable("name") String name)
     {
-        Company company = CompanyDAOImpl.getCompanyById(id);
-        return company;
+    	System.out.println("******Hello");
+        return CompanyDAOImpl.getCompanyByName(name);
     }
     
     /*** Retrieve all Companys ***/
@@ -41,23 +40,22 @@ public class CompanyController {
             method=RequestMethod.GET)
     public List<Company> getAllCompanys()
     {
-        List<Company> CompanyList = CompanyDAOImpl.getAllCompanys();
-        return CompanyList;
+        return CompanyDAOImpl.getAllCompanys();
     }
     
     /*** Update a Company ***/
     @RequestMapping(value="/update/company", method=RequestMethod.PUT, 
             produces="application/json", consumes="application/json")
-    public void updateCompany(@RequestBody Company Company)
+    public void updateCompany(@RequestBody Company company)
     {
-        CompanyDAOImpl.updateCompany(Company);
+        CompanyDAOImpl.updateCompany(company);
     }
     
     /*** Delete a Company ***/
-    @RequestMapping(value="/delete/company/{id}",method = RequestMethod.DELETE,
+    @RequestMapping(value="/delete/company/{name}",method = RequestMethod.DELETE,
              produces="application/json")
-    public void deleteCompany(@PathVariable("id") long id)
+    public void deleteCompany(@PathVariable("name") String name)
     {
-        CompanyDAOImpl.deleteCompany(id);
+        CompanyDAOImpl.deleteCompany(name);
     }
 }
