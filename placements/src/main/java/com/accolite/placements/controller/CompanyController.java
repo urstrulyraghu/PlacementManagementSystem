@@ -19,11 +19,12 @@ public class CompanyController {
     private CompanyDaoImpl CompanyDAOImpl;
     
     /*** Creating a new Company ***/
-    @RequestMapping(value="/create", method=RequestMethod.POST, 
+    @RequestMapping(value="/create/company", method=RequestMethod.POST, 
             produces="application/json", consumes="application/json")
-    public void createCompany(@RequestBody Company Company)
+    public void createCompany(@RequestBody Company company)
     {
-        CompanyDAOImpl.createCompany(Company);
+    	System.out.println("******************" + company);
+        CompanyDAOImpl.createCompany(company);
     }
     
     /*** Retrieve a single Company ***/
@@ -31,8 +32,8 @@ public class CompanyController {
             method=RequestMethod.GET)
     public Company getCompanyById(@PathVariable("id") long id)
     {
-        Company Company = CompanyDAOImpl.getCompanyById(id);
-        return Company;
+        Company company = CompanyDAOImpl.getCompanyById(id);
+        return company;
     }
     
     /*** Retrieve all Companys ***/
@@ -45,7 +46,7 @@ public class CompanyController {
     }
     
     /*** Update a Company ***/
-    @RequestMapping(value="/update", method=RequestMethod.PUT, 
+    @RequestMapping(value="/update/company", method=RequestMethod.PUT, 
             produces="application/json", consumes="application/json")
     public void updateCompany(@RequestBody Company Company)
     {
@@ -53,7 +54,7 @@ public class CompanyController {
     }
     
     /*** Delete a Company ***/
-    @RequestMapping(value="/delete/{id}",method = RequestMethod.DELETE,
+    @RequestMapping(value="/delete/company/{id}",method = RequestMethod.DELETE,
              produces="application/json")
     public void deleteCompany(@PathVariable("id") long id)
     {

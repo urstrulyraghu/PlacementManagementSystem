@@ -14,7 +14,7 @@
  	http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
-	<context:component-scan base-package="com.javainterviewpoint" />
+	<context:component-scan base-package="com.accolite.placements" />
 	<mvc:annotation-driven />
 
 	<!-- Database Configurations -->
@@ -27,36 +27,37 @@
 	</bean>
 	
 	<!-- Hiberante Sesssion Factory Configurations -->
-	<!-- <bean id="sessionFactory"
+	 <bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value>com.javainterviewpoint.model.Student</value>
+				<value>com.accolite.placements.models.Candidate</value>
+				<value>com.accolite.placements.models.Company</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>
 		</property>
-	</bean> -->
+	</bean>
 
 	<!-- Hiberante Entity Manager Configurations -->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan"
-			value="com.javainterviewpoint.model,com.javainterviewpoint.controller,com.javainterviewpoint.dao" />
+			value="com.accolite.placements.models,com.accolite.placements.controller,com.accolite.placements.dao" />
 
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
 		<property name="jpaProperties">
 			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
 			</props>

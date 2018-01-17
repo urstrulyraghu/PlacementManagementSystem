@@ -2,7 +2,14 @@ package com.accolite.placements.dao;
 
 import java.util.List;
 
-import com.accolite.placements.models.Candidate;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.accolite.placements.models.Company;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -11,34 +18,29 @@ public class CompanyDaoImpl implements CompanyDao{
 	 	@PersistenceContext
 	    private EntityManager entityManager;
 	    
-	    @Override
-	    public void createCandidate(Candidate candidate)
+	    public void createCompany(Company Company)
 	    {
-	        entityManager.persist(candidate);
+	        entityManager.persist(Company);
 	    }
 
-	    @Override
-	    public Candidate getCandidateById(long id)
+	    public Company getCompanyById(long id)
 	    {
-	        return entityManager.find(Candidate.class,id);
+	        return entityManager.find(Company.class,id);
 	    }
 
-	    @Override
-	    public List<Candidate> getAllCandidates()
+	    public List<Company> getAllCompanys()
 	    {
-	        return entityManager.createQuery("select stu from Candidate stu").getResultList();
+	        return entityManager.createQuery("select stu from Company stu").getResultList();
 	    }
 
-	    @Override
-	    public void updateCandidate(Candidate candidate)
+	    public void updateCompany(Company Company)
 	    {
-	        entityManager.merge(candidate);
+	        entityManager.merge(Company);
 	    }
 
-	    @Override
-	    public void deleteCandidate(long id)
+	    public void deleteCompany(long id)
 	    {
-	        Candidate s = entityManager.find(Candidate.class,id);
+	        Company s = entityManager.find(Company.class,id);
 	        entityManager.remove(s);
 	    }
 }

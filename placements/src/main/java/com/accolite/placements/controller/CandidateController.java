@@ -22,7 +22,7 @@ public class CandidateController {
 	    private CandidateDaoImpl candidateDAOImpl;
 	    
 	    /*** Creating a new Candidate ***/
-	    @RequestMapping(value="/create", method=RequestMethod.POST, 
+	    @RequestMapping(value="/create/candidate", method=RequestMethod.POST, 
 	            produces="application/json", consumes="application/json")
 	    public void createCandidate(@RequestBody Candidate candidate)
 	    {
@@ -48,7 +48,7 @@ public class CandidateController {
 	    }
 	    
 	    /*** Update a Candidate ***/
-	    @RequestMapping(value="/update", method=RequestMethod.PUT, 
+	    @RequestMapping(value="/update/candidate", method=RequestMethod.PUT, 
 	            produces="application/json", consumes="application/json")
 	    public void updateCandidate(@RequestBody Candidate candidate)
 	    {
@@ -56,7 +56,7 @@ public class CandidateController {
 	    }
 	    
 	    /*** Delete a Candidate ***/
-	    @RequestMapping(value="/delete/{id}",method = RequestMethod.DELETE,
+	    @RequestMapping(value="/delete/candidate/{id}",method = RequestMethod.DELETE,
 	             produces="application/json")
 	    public void deleteCandidate(@PathVariable("id") long id)
 	    {

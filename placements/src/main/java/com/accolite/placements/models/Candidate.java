@@ -1,23 +1,26 @@
 package com.accolite.placements.models;
 
-import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "Candidate")
 public class Candidate {
+	
+	@Id
+	@Column(name="idcandidate")
+	@GeneratedValue
+	long idcandidate;
 	
 	String name;
 	String password;
@@ -25,7 +28,15 @@ public class Candidate {
 	double sscPercentage;
 	double intPercentage;
 	double degPercentage;
-	Company company;
+	long company;
+	
+	
+	public long getIdcandidate() {
+		return idcandidate;
+	}
+	public void setIdcandidate(long idcandidate) {
+		this.idcandidate = idcandidate;
+	}
 	public String getName() {
 		return name;
 	}
@@ -62,14 +73,14 @@ public class Candidate {
 	public void setDegPercentage(double degPercentage) {
 		this.degPercentage = degPercentage;
 	}
-	public Company getCompany() {
+	public long getCompany() {
 		return company;
 	}
-	public void setCompany(Company company) {
+	public void setCompany(long company) {
 		this.company = company;
 	}
 	public Candidate(String name, String password, String edQual, double sscPercentage, double intPercentage,
-			double degPercentage, Company company) {
+			double degPercentage, long company) {
 		super();
 		this.name = name;
 		this.password = password;

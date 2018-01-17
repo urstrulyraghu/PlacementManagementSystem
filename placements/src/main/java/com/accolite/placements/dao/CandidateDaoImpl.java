@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.accolite.placements.models.Candidate;
+import com.accolite.placements.dao.CandidateDao;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -18,35 +19,31 @@ public class CandidateDaoImpl implements CandidateDao{
 
 	    @PersistenceContext
 	    private EntityManager entityManager;
-	    
-	    @Override
+	
 	    public void createCandidate(Candidate candidate)
 	    {
 	        entityManager.persist(candidate);
 	    }
 
-	    @Override
-	    public Candidate getCandidateById(long id)
+	    public Candidate getCandidateById(long idcandidate)
 	    {
-	        return entityManager.find(Candidate.class,id);
+	        return entityManager.find(Candidate.class,idcandidate);
 	    }
 
-	    @Override
+	    
 	    public List<Candidate> getAllCandidates()
 	    {
 	        return entityManager.createQuery("select stu from Candidate stu").getResultList();
 	    }
 
-	    @Override
 	    public void updateCandidate(Candidate candidate)
 	    {
 	        entityManager.merge(candidate);
 	    }
 
-	    @Override
-	    public void deleteCandidate(long id)
+	    public void deleteCandidate(long idcandidate)
 	    {
-	        Candidate s = entityManager.find(Candidate.class,id);
+	        Candidate s = entityManager.find(Candidate.class,idcandidate);
 	        entityManager.remove(s);
 	    }
 }

@@ -8,11 +8,11 @@ public interface CandidateDao {
 
 	    public void createCandidate(Candidate candidate);
 	    
-	    public Candidate getCandidateById(long id);
+	    public Candidate getCandidateById(long idcandidate);
 	    
 	    public List<Candidate> getAllCandidates();
 	    
 	    public void updateCandidate(Candidate candidate);
 	    
-	    public void deleteCandidate(long id);
+	    public void deleteCandidate(long idcandidate);
 	}
