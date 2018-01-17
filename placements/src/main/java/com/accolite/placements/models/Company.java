@@ -1,6 +1,8 @@
 package com.accolite.placements.models;
 
 import java.io.Serializable;
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -18,7 +20,7 @@ public class Company implements Serializable{
 	String name;
 	String jobRole;
 	String description;
-	String date;
+	Date date;
 	Double payPackage;
 	
 	
@@ -27,7 +29,7 @@ public class Company implements Serializable{
 	}
 	
 	@JsonCreator
-	public Company(@JsonProperty("name")String name, @JsonProperty("jobRole")String jobRole, @JsonProperty("description")String description, @JsonProperty("date")String date, @JsonProperty("payPackage")Double payPackage) {
+	public Company(@JsonProperty("name")String name, @JsonProperty("jobRole")String jobRole, @JsonProperty("description")String description, @JsonProperty("date")Date date, @JsonProperty("payPackage")Double payPackage) {
 		super();
 		this.name = name;
 		this.jobRole = jobRole;
@@ -54,10 +56,10 @@ public class Company implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	public Double getPayPackage() {

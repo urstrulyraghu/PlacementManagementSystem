@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accolite.placements.dao.CandidateDaoImpl;
@@ -33,11 +31,18 @@ public class CandidateController {
 	    	Candidate candidate = candidateDaoImpl.getCandidateByName(name);
 	    	if(candidate.getPassword().equals(password)) {
 	    		response.setStatus(200);
+	    		return new ResponseEntity(HttpStatus.OK);
 	    	}
 	    	else {
-	    		response.setStatus(400);
+	    		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	    	}
-	    	return response;
+	    	
+	    }
+	    
+	    /*** Apply for a company ***/
+	    @RequestMapping(value="/apply/{companyName}", method=RequestMethod.POST)
+	    public void applyCompany(@PathVariable("companyName") String companyName) {
+	    	
 	    }
 	    
 	    /*** Creating a new Candidate ***/
