@@ -9,6 +9,7 @@ public interface CompanyDao {
 	 	public void createCompany(Company company);
 	    
 	    public Company getCompanyByName(String name);
+	    
 	    public List<Company> getAllCompanys();
 	    
 	    public void updateCompany(Company company);

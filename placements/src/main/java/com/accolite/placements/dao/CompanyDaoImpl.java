@@ -25,8 +25,7 @@ public class CompanyDaoImpl implements CompanyDao{
 
 	    public Company getCompanyByName(String name)
 	    {
-	    	System.out.println("doaimpl");
-	        return entityManager.find(Company.class,name);
+	    	return (Company)entityManager.createQuery("Select * from Company where name = " + name).getSingleResult();
 	    }
 
 	    public List<Company> getAllCompanys()

@@ -8,7 +8,7 @@ public interface CandidateDao {
 
 	    public void createCandidate(Candidate candidate);
 	    
-	    public Candidate getCandidateById(long idcandidate);
+	    public Candidate getCandidateByName(String name);
 	    
 	    public List<Candidate> getAllCandidates();
 	    

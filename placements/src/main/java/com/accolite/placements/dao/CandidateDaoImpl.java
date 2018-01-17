@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.accolite.placements.models.Candidate;
+import com.accolite.placements.models.Company;
 import com.accolite.placements.dao.CandidateDao;
 
 @Service
@@ -25,9 +26,9 @@ public class CandidateDaoImpl implements CandidateDao{
 	        entityManager.persist(candidate);
 	    }
 
-	    public Candidate getCandidateById(long idcandidate)
+	    public Candidate getCandidateByName(String name)
 	    {
-	        return entityManager.find(Candidate.class,idcandidate);
+	    	return (Candidate)entityManager.createQuery("Select * from Candidate where name = " + name).getSingleResult();
 	    }
 
 	    

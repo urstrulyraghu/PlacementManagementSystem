@@ -3,16 +3,9 @@ package com.accolite.placements.models;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -31,19 +24,11 @@ public class Candidate implements Serializable{
 	double sscPercentage;
 	double intPercentage;
 	double degPercentage;
-//	boolean company;
-	
-	
+		
 	public Candidate() {
 		super();
 	}
-	
-//	public long getIdcandidate() {
-//		return idcandidate;
-//	}
-//	public void setIdcandidate(long idcandidate) {
-//		this.idcandidate = idcandidate;
-//	}
+
 	public String getName() {
 		return name;
 	}
@@ -80,12 +65,7 @@ public class Candidate implements Serializable{
 	public void setDegPercentage(double degPercentage) {
 		this.degPercentage = degPercentage;
 	}
-//	public long getCompany() {
-//		return company;
-//	}
-//	public void setCompany(long company) {
-//		this.company = company;
-//	}
+
 	@JsonCreator
 	public Candidate(@JsonProperty("name") String name,@JsonProperty("password") String password,@JsonProperty("edQual") String edQual,@JsonProperty("sscPercentage") double sscPercentage,@JsonProperty("intPercentage") double intPercentage,
 			@JsonProperty("degPercentage")	double degPercentage) {
