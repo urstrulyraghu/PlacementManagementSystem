@@ -1,0 +1,19 @@
+{
+    "companies":[
+        {
+            "name":"Accolite",
+            "package":"10",
+            "profile":"Software Developer"
+        },
+        {
+            "name":"Infosys",
+            "package":"3.5",
+            "profile":"Software Analyst"
+        },
+        {
+            "name":"ABC",
+            "package":"12",
+            "profile":"System Analyst"
+        }
+    ]
+}
