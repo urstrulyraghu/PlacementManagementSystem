@@ -38,6 +38,36 @@ class RegStudent implements Serializable{
 	public RegStudent() {
 		super();
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((company == null) ? 0 : company.hashCode());
+		result = prime * result + ((student == null) ? 0 : student.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RegStudent other = (RegStudent) obj;
+		if (company == null) {
+			if (other.getCompanyName() != null)
+				return false;
+		} else if (!company.equals(other.getCompanyName()))
+			return false;
+		if (student == null) {
+			if (other.getStudentName() != null)
+				return false;
+		} else if (!student.equals(other.getStudentName()))
+			return false;
+		return true;
+	}
+	
 	
 	
 	
@@ -51,6 +81,7 @@ public class RegisteredStudent implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@EmbeddedId
 	RegStudent regStudent;
 	

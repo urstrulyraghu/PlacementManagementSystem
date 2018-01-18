@@ -30,7 +30,6 @@ public class CandidateController {
 	    	HttpServletResponse response;
 	    	Candidate candidate = candidateDaoImpl.getCandidateByName(name);
 	    	if(candidate.getPassword().equals(password)) {
-	    		response.setStatus(200);
 	    		return new ResponseEntity(HttpStatus.OK);
 	    	}
 	    	else {
