@@ -23,16 +23,13 @@ public class RegisteredStudentDaoImpl implements RegisteredStudentDao{
 	}
 
 	public RegisteredStudent getRegisteredStudentByStudentName(String studentName) {
-		return (RegisteredStudent)entityManager.createQuery("Select * from RegisteredStudents where studentName = " + studentName).getSingleResult();
+		return (RegisteredStudent)entityManager.createQuery("Select * from registered_students where studentName = " + studentName).getSingleResult();
 	}
 
 	public RegisteredStudent getRegisteredStudentByCompanyName(String companyName) {
-		return (RegisteredStudent)entityManager.createQuery("Select * from RegisteredStudents where companyName = " + companyName).getSingleResult();
+		return (RegisteredStudent)entityManager.createQuery("Select * from registered_students where companyName = " + companyName).getSingleResult();
 	}
 
-	public List<RegisteredStudent> getAllRegistredStudents() {
-		return entityManager.createQuery("Select * from RegisteredStudents").getResultList();
-	}
 
 	public void updateRegisteredStudent(RegisteredStudent registeredStudent) {
 		entityManager.merge(registeredStudent);
@@ -41,5 +38,9 @@ public class RegisteredStudentDaoImpl implements RegisteredStudentDao{
 	public void deleteRegisteredStudent(String Studentname) {
 //		// TODO Auto-generated method stub
 //		
+	}
+
+	public List<RegisteredStudent> getAllRegisteredStudents() {
+        return entityManager.createQuery("select stu from registered_students stu").getResultList();
 	}
 }

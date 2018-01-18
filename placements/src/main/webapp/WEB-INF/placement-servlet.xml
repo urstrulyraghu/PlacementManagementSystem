@@ -64,7 +64,24 @@
 			</props>
 		</property>
 	</bean>
-
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
+		autowire="byType">
+		<!-- SMTP settings -->
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="tarun.k@accoliteindia.com" />
+		<property name="password" value="YOUR_PASSWORD" />
+		<property name="javaMailProperties">
+			<!-- additional properties specific to JavaMail -->
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="mailUtil" class="com.accolite.placements.utilities.notify" autowire="byType">
+	</bean>
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>

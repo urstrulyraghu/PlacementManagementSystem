@@ -17,14 +17,6 @@ public class RegisteredStudentController {
 	
 	@Autowired
     private RegisteredStudentDaoImpl registeredStudentDaoImpl;
-	
-	/*** Creating a new RegisteredStudent ***/
-    @RequestMapping(value="/create/RegisteredStudent", method=RequestMethod.POST, 
-            produces="application/json", consumes="application/json")
-    public void createRegisteredStudent(@RequestBody RegisteredStudent registeredStudent)
-    {
-        registeredStudentDaoImpl.createRegisteredStudent(registeredStudent);
-    }
     
     /*** Retrieve a single RegisteredStudent ***/
     @RequestMapping(value="/RegisteredStudent/{studentName}", produces="application/json",

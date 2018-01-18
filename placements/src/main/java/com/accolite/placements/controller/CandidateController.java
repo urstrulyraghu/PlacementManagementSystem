@@ -13,23 +13,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.accolite.placements.dao.CandidateDaoImpl;
-import com.accolite.placements.models.Candidate;
+import com.accolite.placements.dao.*;
+import com.accolite.placements.models.*;
 
 @RestController
 public class CandidateController {
 	
-
+		private String candidateName = "-1";
+	    
 	    @Autowired
 	    private CandidateDaoImpl candidateDaoImpl;
 	    
+	    @Autowired
+	    private RegisteredStudentDaoImpl registeredStudentDaoImpl;
+		
 	    /*** login for a user ***/
 	    @RequestMapping(value="/login/candidate", method=RequestMethod.POST)
 	    public ResponseEntity loginCandidate(@RequestParam("username") String name, @RequestParam("password") String password) {
-	    	HttpServletResponse response;
 	    	Candidate candidate = candidateDaoImpl.getCandidateByName(name);
 	    	if(candidate.getPassword().equals(password)) {
+	    		this.candidateName = name;
 	    		return new ResponseEntity(HttpStatus.OK);
 	    	}
 	    	else {
@@ -39,9 +42,12 @@ public class CandidateController {
 	    }
 	    
 	    /*** Apply for a company ***/
-	    @RequestMapping(value="/apply/{companyName}", method=RequestMethod.POST)
-	    public void applyCompany(@PathVariable("companyName") String companyName) {
-	    	
+	    @RequestMapping(value="/apply/{company}", method=RequestMethod.POST)
+	    public void applyCompany(@PathVariable("company") String companyName) {
+	    	RegStudent regStudent = new RegStudent(candidateName, companyName);
+	    	RegisteredStudent registeredStudent = new RegisteredStudent(regStudent);
+	        registeredStudentDaoImpl.createRegisteredStudent(registeredStudent);
+
 	    }
 	    
 	    /*** Creating a new Candidate ***/

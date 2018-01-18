@@ -9,21 +9,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.accolite.placements.dao.CandidateDaoImpl;
 import com.accolite.placements.dao.CompanyDaoImpl;
+import com.accolite.placements.models.Candidate;
 import com.accolite.placements.models.Company;
+import com.accolite.placements.utitlities.Notification;
 
 @RestController
 public class CompanyController {
 
     @Autowired
-    private CompanyDaoImpl CompanyDAOImpl;
+    private CompanyDaoImpl companyDaoImpl;
+    
+    @Autowired
+    private CandidateDaoImpl candidateDaoImpl;
     
     /*** Creating a new Company ***/
     @RequestMapping(value="/create/company", method=RequestMethod.POST, 
             produces="application/json", consumes="application/json")
     public void createCompany(@RequestBody Company company)
     {
-        CompanyDAOImpl.createCompany(company);
+    	List<Candidate> candidates = candidateDaoImpl.getAllCandidates();
+    	for(Candidate candidate : candidates) {
+    		Notification notification = new Notification(candidate, company);
+    		notification.sendEmail();
+    	}
+        companyDaoImpl.createCompany(company);
     }
     
     /*** Retrieve a single Company ***/
@@ -31,8 +42,7 @@ public class CompanyController {
             method=RequestMethod.GET)
     public Company getCompanyByName(@PathVariable("name") String name)
     {
-    	System.out.println("******Hello");
-        return CompanyDAOImpl.getCompanyByName(name);
+        return companyDaoImpl.getCompanyByName(name);
     }
     
     /*** Retrieve all Companys ***/
@@ -40,7 +50,7 @@ public class CompanyController {
             method=RequestMethod.GET)
     public List<Company> getAllCompanys()
     {
-        return CompanyDAOImpl.getAllCompanys();
+        return companyDaoImpl.getAllCompanys();
     }
     
     /*** Update a Company ***/
@@ -48,7 +58,7 @@ public class CompanyController {
             produces="application/json", consumes="application/json")
     public void updateCompany(@RequestBody Company company)
     {
-        CompanyDAOImpl.updateCompany(company);
+        companyDaoImpl.updateCompany(company);
     }
     
     /*** Delete a Company ***/
@@ -56,6 +66,6 @@ public class CompanyController {
              produces="application/json")
     public void deleteCompany(@PathVariable("name") String name)
     {
-        CompanyDAOImpl.deleteCompany(name);
+        companyDaoImpl.deleteCompany(name);
     }
 }

@@ -24,9 +24,18 @@ public class Candidate implements Serializable{
 	double sscPercentage;
 	double intPercentage;
 	double degPercentage;
+	String email;
 		
 	public Candidate() {
 		super();
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getName() {
@@ -68,7 +77,7 @@ public class Candidate implements Serializable{
 
 	@JsonCreator
 	public Candidate(@JsonProperty("name") String name,@JsonProperty("password") String password,@JsonProperty("edQual") String edQual,@JsonProperty("sscPercentage") double sscPercentage,@JsonProperty("intPercentage") double intPercentage,
-			@JsonProperty("degPercentage")	double degPercentage) {
+			@JsonProperty("degPercentage")	double degPercentage, @JsonProperty("email") String email ) {
 		super();
 		this.name = name;
 		this.password = password;
@@ -76,6 +85,7 @@ public class Candidate implements Serializable{
 		this.sscPercentage = sscPercentage;
 		this.intPercentage = intPercentage;
 		this.degPercentage = degPercentage;
+		this.email = email;
 	}
 
 	
