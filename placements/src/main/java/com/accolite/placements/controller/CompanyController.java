@@ -15,11 +15,14 @@ import com.accolite.placements.dao.CandidateDaoImpl;
 import com.accolite.placements.dao.CompanyDaoImpl;
 import com.accolite.placements.models.Candidate;
 import com.accolite.placements.models.Company;
-import com.accolite.placements.utitlities.Notification;
+import com.accolite.placements.utilities.MailUtility;
 
 @RestController
 public class CompanyController {
 
+	@Autowired
+	public MailUtility mailUtility;
+	
     @Autowired
     private CompanyDaoImpl companyDaoImpl;
     
@@ -31,10 +34,15 @@ public class CompanyController {
             produces="application/json", consumes="application/json")
     public void createCompany(@RequestBody Company company)
     {
+    	String msgText = "Hello, \n a new company is conducting placement drive with the following details \n " + company.getName() + "\n" + company.getDescription() + "\n" + company.getJobRole() + "\n" + company.getPayPackage() + "\n Date of interview " + company.getDate();
     	List<Candidate> candidates = candidateDaoImpl.getAllCandidates();
     	for(Candidate candidate : candidates) {
+<<<<<<< HEAD
     		//Notification notification = new Notification(candidate, company);
     		//notification.sendEmail();
+=======
+    		mailUtility.sendEmailAsync(candidate.getEmail(), "A new Company is interviewing!", msgText);
+>>>>>>> daee61e967c1c08b3dc1de9b7a2a13cb21046a68
     	}
         companyDaoImpl.createCompany(company);
     }
@@ -66,12 +74,5 @@ public class CompanyController {
     {
         companyDaoImpl.updateCompany(company);
     }
-    
-    /*** Delete a Company ***/
-    @RequestMapping(value="/delete/company/{name}",method = RequestMethod.DELETE,
-             produces="application/json")
-    public void deleteCompany(@PathVariable("name") String name)
-    {
-        companyDaoImpl.deleteCompany(name);
-    }
+ 
 }

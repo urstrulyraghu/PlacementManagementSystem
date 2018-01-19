@@ -2,9 +2,12 @@ package com.accolite.placements.controller;
 
 import java.util.List;
 
+<<<<<<< HEAD
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+=======
+>>>>>>> daee61e967c1c08b3dc1de9b7a2a13cb21046a68
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -101,12 +104,5 @@ public class CandidateController {
 	    {
 	        candidateDaoImpl.updateCandidate(candidate);
 	    }
-	    
-	    /*** Delete a Candidate ***/
-	    @RequestMapping(value="/delete/candidate/{id}",method = RequestMethod.DELETE,
-	             produces="application/json")
-	    public void deleteCandidate(@PathVariable("id") long id)
-	    {
-	        candidateDaoImpl.deleteCandidate(id);
-	    }
+
 }

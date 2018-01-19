@@ -21,7 +21,7 @@ public class CandidateDaoImpl implements CandidateDao{
 	
 	    public void createCandidate(Candidate candidate)
 	    {
-	        entityManager.persist(candidate);
+	    		entityManager.persist(candidate);
 	    }
 
 	    public Candidate getCandidateByName(String name)
@@ -37,12 +37,6 @@ public class CandidateDaoImpl implements CandidateDao{
 
 	    public void updateCandidate(Candidate candidate)
 	    {
-	        entityManager.merge(candidate);
-	    }
-
-	    public void deleteCandidate(long idcandidate)
-	    {
-	        Candidate s = entityManager.find(Candidate.class,idcandidate);
-	        entityManager.remove(s);
+	    	entityManager.merge(candidate);
 	    }
 }

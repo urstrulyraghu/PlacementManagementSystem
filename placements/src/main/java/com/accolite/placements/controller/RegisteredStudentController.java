@@ -42,8 +42,8 @@ public class RegisteredStudentController {
     /*** Update a RegisteredStudent ***/
     @RequestMapping(value="/update/RegisteredStudent", method=RequestMethod.PUT, 
             produces="application/json", consumes="application/json")
-    public void updateRegisteredStudent(@RequestBody RegisteredStudent RegisteredStudent)
+    public void updateRegisteredStudent(@RequestBody RegisteredStudent registeredStudent)
     {
-        registeredStudentDaoImpl.updateRegisteredStudent(RegisteredStudent);
+        registeredStudentDaoImpl.updateRegisteredStudent(registeredStudent);
     }
 }

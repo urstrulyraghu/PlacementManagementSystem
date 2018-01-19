@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 .classpath
 
@@ -10,3 +11,11 @@ target/
 .vscode/
 
 .scannerwork/
+=======
+.classpath
+.settings/
+.project
+target/
+.vscode/
+.scannerwork/
+>>>>>>> daee61e967c1c08b3dc1de9b7a2a13cb21046a68

@@ -16,5 +16,4 @@ public interface RegisteredStudentDao {
     
     public void updateRegisteredStudent(RegisteredStudent registeredStudent);
     
-    public void deleteRegisteredStudent(String name);
 }
