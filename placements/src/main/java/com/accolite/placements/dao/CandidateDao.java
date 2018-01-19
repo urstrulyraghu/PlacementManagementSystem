@@ -14,5 +14,4 @@ public interface CandidateDao {
 	    
 	    public void updateCandidate(Candidate candidate);
 	    
-	    public void deleteCandidate(long idcandidate);
-	}
+}

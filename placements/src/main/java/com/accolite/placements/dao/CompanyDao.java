@@ -13,7 +13,5 @@ public interface CompanyDao {
 	    public List<Company> getAllCompanys();
 	    
 	    public void updateCompany(Company company);
-	    
-	    public void deleteCompany(String name);
-	    
+	    	    
 }
