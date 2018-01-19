@@ -80,8 +80,8 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="mailUtil" class="com.accolite.placements.utilities.notification" autowire="byType">
-	</bean>
+	<!-- <bean id="mailUtil" class="com.accolite.placements.utilities.Notification" autowire="byType">
+	</bean>  -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>

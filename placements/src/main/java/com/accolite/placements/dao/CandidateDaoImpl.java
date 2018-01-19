@@ -26,7 +26,7 @@ public class CandidateDaoImpl implements CandidateDao{
 
 	    public Candidate getCandidateByName(String name)
 	    {
-	    	return (Candidate)entityManager.createQuery("Select * from Candidate where name = " + name).getSingleResult();
+	    	return entityManager.find(Candidate.class, name);
 	    }
 
 	    
