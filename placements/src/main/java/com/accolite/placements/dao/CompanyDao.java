@@ -6,12 +6,12 @@ import com.accolite.placements.models.Company;
 
 public interface CompanyDao {
 
-	 	public void createCompany(Company company);
+	 	public boolean createCompany(Company company);
 	    
 	    public Company getCompanyByName(String name);
 	    
 	    public List<Company> getAllCompanys();
 	    
-	    public void updateCompany(Company company);
+	    public boolean updateCompany(Company company);
 	    	    
 }

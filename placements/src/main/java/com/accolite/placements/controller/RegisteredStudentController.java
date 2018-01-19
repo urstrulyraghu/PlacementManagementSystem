@@ -21,14 +21,14 @@ public class RegisteredStudentController {
     /*** Retrieve a single RegisteredStudent ***/
     @RequestMapping(value="/RegisteredStudent/{studentName}", produces="application/json",
             method=RequestMethod.GET)
-    public RegisteredStudent getRegisteredStudentByStudentName(@PathVariable("studentName") String studentName){
-        return registeredStudentDaoImpl.getRegisteredStudentByStudentName(studentName);
+    public List<RegisteredStudent> getRegisteredStudentsByStudentName(@PathVariable("studentName") String studentName){
+        return registeredStudentDaoImpl.getRegisteredStudentsByStudentName(studentName);
     }
     
     @RequestMapping(value="/RegisteredStudent/{companyName}", produces="application/json",
             method=RequestMethod.GET)
-    public RegisteredStudent getRegisteredStudentByCompanyName(@PathVariable("companyName") String companyName){
-        return registeredStudentDaoImpl.getRegisteredStudentByCompanyName(companyName);
+    public List<RegisteredStudent> getRegisteredStudentsByCompanyName(@PathVariable("companyName") String companyName){
+        return registeredStudentDaoImpl.getRegisteredStudentsByCompanyName(companyName);
     }
     
     /*** Retrieve all RegisteredStudents ***/
@@ -38,12 +38,5 @@ public class RegisteredStudentController {
     {
         return registeredStudentDaoImpl.getAllRegisteredStudents();
     }
-    
-    /*** Update a RegisteredStudent ***/
-    @RequestMapping(value="/update/RegisteredStudent", method=RequestMethod.PUT, 
-            produces="application/json", consumes="application/json")
-    public void updateRegisteredStudent(@RequestBody RegisteredStudent registeredStudent)
-    {
-        registeredStudentDaoImpl.updateRegisteredStudent(registeredStudent);
-    }
+
 }

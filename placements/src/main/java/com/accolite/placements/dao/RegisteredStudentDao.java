@@ -6,14 +6,12 @@ import com.accolite.placements.models.RegisteredStudent;
 
 public interface RegisteredStudentDao {
 	
-	public void createRegisteredStudent(RegisteredStudent registeredStudent);
+	public boolean createRegisteredStudent(RegisteredStudent registeredStudent);
     
-    public RegisteredStudent getRegisteredStudentByStudentName(String studentName);
+    public List<RegisteredStudent> getRegisteredStudentsByStudentName(String studentName);
     
-    public RegisteredStudent getRegisteredStudentByCompanyName(String companyName);
+    public List<RegisteredStudent> getRegisteredStudentsByCompanyName(String companyName);
     
     public List<RegisteredStudent> getAllRegisteredStudents();
-    
-    public void updateRegisteredStudent(RegisteredStudent registeredStudent);
-    
+        
 }

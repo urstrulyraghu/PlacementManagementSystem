@@ -18,24 +18,37 @@ public class RegisteredStudentDaoImpl implements RegisteredStudentDao{
 	 @PersistenceContext
 	    private EntityManager entityManager;
 
-	public void createRegisteredStudent(RegisteredStudent registeredStudent) {
-		entityManager.persist(registeredStudent);
+	public boolean createRegisteredStudent(RegisteredStudent registeredStudent) {
+		try {
+			entityManager.persist(registeredStudent);
+			return true;
+		}
+		catch(Exception e) {
+			return false;
+		}
 	}
 
-	public RegisteredStudent getRegisteredStudentByStudentName(String studentName) {
-		return (RegisteredStudent)entityManager.createQuery("Select * from RegisteredStudent where studentName = " + studentName).getSingleResult();
+	public List<RegisteredStudent> getRegisteredStudentsByStudentName(String studentName) {
+		return entityManager.createQuery("Select stu from RegisteredStudent stu where studentName = " + studentName).getResultList();
 	}
 
-	public RegisteredStudent getRegisteredStudentByCompanyName(String companyName) {
-		return (RegisteredStudent)entityManager.createQuery("Select * from RegisteredStudent where companyName = " + companyName).getSingleResult();
+	public List<RegisteredStudent> getRegisteredStudentsByCompanyName(String companyName) {
+		return entityManager.createQuery("Select stu from RegisteredStudent stu where companyName = " + companyName).getResultList();
 	}
 
 
-	public void updateRegisteredStudent(RegisteredStudent registeredStudent) {
-		entityManager.merge(registeredStudent);
+	public boolean updateRegisteredStudent(RegisteredStudent registeredStudent) {
+		try {
+			entityManager.merge(registeredStudent);
+			return true;
+		}
+		catch(Exception e) {
+			return false;
+		}
 	}
 
 	public List<RegisteredStudent> getAllRegisteredStudents() {
-        return entityManager.createQuery("select stu from RegisteredStudent stu").getResultList();
+		return entityManager.createQuery("select stu from RegisteredStudent stu").getResultList();
 	}
+
 }

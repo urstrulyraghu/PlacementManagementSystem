@@ -19,24 +19,36 @@ public class CandidateDaoImpl implements CandidateDao{
 	    @PersistenceContext
 	    private EntityManager entityManager;
 	
-	    public void createCandidate(Candidate candidate)
+	    public boolean createCandidate(Candidate candidate)
 	    {
+	    	try {
 	    		entityManager.persist(candidate);
+	    		return true;
+	    	}
+	    	catch(Exception e) {
+	    		return false;
+	    	}
 	    }
 
 	    public Candidate getCandidateByName(String name)
 	    {
-	    	return (Candidate)entityManager.createQuery("Select * from Candidate where name = " + name).getSingleResult();
+	    	return entityManager.find(Candidate.class, name);
 	    }
 
 	    
 	    public List<Candidate> getAllCandidates()
 	    {
-	        return entityManager.createQuery("select stu from Candidate stu").getResultList();
+	        return entityManager.createQuery("SELECT stu from Candidate stu").getResultList();
 	    }
 
-	    public void updateCandidate(Candidate candidate)
+	    public boolean updateCandidate(Candidate candidate)
 	    {
-	    	entityManager.merge(candidate);
+	    	try {
+	    		entityManager.merge(candidate);
+	    		return true;
+	    	}
+	    	catch(Exception e) {
+	    		return false;
+	    	}
 	    }
 }

@@ -19,7 +19,7 @@ public class PlacedCandidate implements Serializable{
 	@EmbeddedId
 	PlacedCandidateId placedCandidateId;
 
-	Date year;
+	String year;
 	double payPackage;
 	
 	public PlacedCandidateId getPlacedCandidateId() {
@@ -28,10 +28,10 @@ public class PlacedCandidate implements Serializable{
 	public void setPlacedCandidateId(PlacedCandidateId placedCandidateId) {
 		this.placedCandidateId = placedCandidateId;
 	}
-	public Date getYear() {
+	public String getYear() {
 		return year;
 	}
-	public void setYear(Date year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 	public double getPayPackage() {
@@ -40,7 +40,7 @@ public class PlacedCandidate implements Serializable{
 	public void setPayPackage(double payPackage) {
 		this.payPackage = payPackage;
 	}
-	public PlacedCandidate(PlacedCandidateId placedCandidateId, Date year, double payPackage) {
+	public PlacedCandidate(PlacedCandidateId placedCandidateId, String year, double payPackage) {
 		super();
 		this.placedCandidateId = placedCandidateId;
 		this.year = year;

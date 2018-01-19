@@ -1,5 +1,6 @@
 package com.accolite.placements.dao;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,24 +19,26 @@ public class PlacedCandidateDaoImpl implements PlacedCandidateDao{
 	@PersistenceContext
     private EntityManager entityManager;
 
-	public void createPlacedCandidate(PlacedCandidate placedCandidate) {
-		entityManager.persist(placedCandidate);
+	public boolean createPlacedCandidate(PlacedCandidate placedCandidate) {
+		try {
+			entityManager.persist(placedCandidate);
+			return true;
+		}
+		catch(Exception e) {
+			return false;
+		}
 	}
 
-	public PlacedCandidate getPlacedCandidateByCandidateName(String studentName) {
-		return (PlacedCandidate)entityManager.createQuery("Select stu from PlacedCandidate where studentName = " + studentName).getSingleResult();
-	}
-
-	public PlacedCandidate getPlacedCandidateByCompanyName(String companyName) {
-		return (PlacedCandidate)entityManager.createQuery("Select stu from PlacedCandidate where studentName = " + companyName).getSingleResult();
+	public List<PlacedCandidate> getPlacedCandidatesByCompanyName(String companyName) {
+		return entityManager.createQuery("Select stu from PlacedCandidate where studentName = " + companyName).getResultList();
 	}
 	
 	public List<PlacedCandidate> getAllPlacedCandidates() {
 		return entityManager.createQuery("select stu from PlacedCandidate").getResultList();
 	}
 
-	public void updatePlacedCandidate(PlacedCandidate placedCandidate) {
-		entityManager.merge(placedCandidate);
+	public List<PlacedCandidate> getPlacedCandidatesByYear(String year) {
+		return entityManager.createQuery("Select stu from PlacedCandidate where year = " + year).getResultList();
 	}
 
 }

@@ -18,14 +18,20 @@ public class CompanyDaoImpl implements CompanyDao{
 	 	@PersistenceContext
 	    private EntityManager entityManager;
 	    
-	    public void createCompany(Company company)
+	    public boolean createCompany(Company company)
 	    {
-	        entityManager.persist(company);
+	    	try {
+	    		entityManager.persist(company);
+	    		return true;
+	    	}
+	    	catch(Exception e) {
+	    		return false;
+	    	}
 	    }
-
+	    
 	    public Company getCompanyByName(String name)
 	    {
-	    	return (Company)entityManager.createQuery("Select * from Company where name = " + name).getSingleResult();
+	    	return entityManager.find(Company.class, name);
 	    }
 
 	    public List<Company> getAllCompanys()
@@ -33,9 +39,15 @@ public class CompanyDaoImpl implements CompanyDao{
 	        return entityManager.createQuery("select stu from Company stu").getResultList();
 	    }
 
-	    public void updateCompany(Company company)
+	    public boolean updateCompany(Company company)
 	    {
-	        entityManager.merge(company);
+	    	try {
+	    		entityManager.merge(company);
+	    		return true;
+	    	}
+	    	catch(Exception e) {
+	    		return false;
+	    	}
 	    }
 
 }
