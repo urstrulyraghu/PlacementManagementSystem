@@ -27,7 +27,7 @@ public class PlacedCandidateDaoImplTest extends TestCase {
 	@Test
 	@Rollback(true)
 	public void testCreatePlacedCandidate() {
-		PlacedCandidate placedCandidate = new PlacedCandidate(new PlacedCandidateId("raghu", "accolite"), "2017", 9.80);
+		PlacedCandidate placedCandidate = new PlacedCandidate(new PlacedCandidateId("2017", "accolite"), 45, 9.80);
 		boolean result = placedCandidateDaoImpl.createPlacedCandidate(placedCandidate);
 		assertTrue(result);
 	}
@@ -35,7 +35,7 @@ public class PlacedCandidateDaoImplTest extends TestCase {
 	@Test
 	@Rollback(true)
 	public void testGetPlacedCandidatesByCompanyName() {
-		PlacedCandidate placedCandidate = new PlacedCandidate(new PlacedCandidateId("raghu", "accolite"), "2017", 9.80);
+		PlacedCandidate placedCandidate = new PlacedCandidate(new PlacedCandidateId("2017", "accolite"), 45, 9.80);
 		placedCandidateDaoImpl.createPlacedCandidate(placedCandidate);
 		List<PlacedCandidate> placedCandidates = placedCandidateDaoImpl.getPlacedCandidatesByCompanyName("accolite");
 		assertEquals(9.80, placedCandidates.get(0).getPayPackage());
@@ -44,16 +44,30 @@ public class PlacedCandidateDaoImplTest extends TestCase {
 	@Test
 	@Rollback(true)
 	public void testGetPLacedCandidatesByYear() {
-		PlacedCandidate placedCandidate = new PlacedCandidate(new PlacedCandidateId("raghu", "accolite"), "2017", 9.80);
+		PlacedCandidate placedCandidate = new PlacedCandidate();
+		PlacedCandidateId placedCandidateId = new PlacedCandidateId();
+		placedCandidateId.setCompanyName("accolite");
+		placedCandidateId.setYear("2017");
+		placedCandidate.setPlacedCandidateId(placedCandidateId);
+		placedCandidate.setCandidateCount(45);
+		placedCandidate.setPayPackage(9.80);
+
 		placedCandidateDaoImpl.createPlacedCandidate(placedCandidate);
 		List<PlacedCandidate> placedCandidates = placedCandidateDaoImpl.getPlacedCandidatesByYear("2017");
+		
+		PlacedCandidateId placedCandidateIdTest = new PlacedCandidateId("2017", "accolite");
+		assertEquals(placedCandidateIdTest.hashCode(), placedCandidates.get(0).getPlacedCandidateId().hashCode());
+		assertTrue(placedCandidateIdTest.equals(placedCandidates.get(0).getPlacedCandidateId()));
 		assertEquals(9.80, placedCandidates.get(0).getPayPackage());
+		assertEquals("2017",placedCandidates.get(0).getPlacedCandidateId().getYear());
+		assertEquals("accolite",placedCandidates.get(0).getPlacedCandidateId().getCompanyName());
+		assertEquals(45, placedCandidates.get(0).getCandidateCount());
 	}
 	
 	@Test
 	@Rollback(true)
 	public void testGetAllPlacedCandidates() {
-		PlacedCandidate placedCandidate = new PlacedCandidate(new PlacedCandidateId("raghu", "accolite"), "2017", 9.80);
+		PlacedCandidate placedCandidate = new PlacedCandidate(new PlacedCandidateId("2017", "accolite"), 45, 9.80);
 		placedCandidateDaoImpl.createPlacedCandidate(placedCandidate);
 		List<PlacedCandidate> placedCandidates = placedCandidateDaoImpl.getAllPlacedCandidates();
 		assertEquals(9.80, placedCandidates.get(0).getPayPackage());	

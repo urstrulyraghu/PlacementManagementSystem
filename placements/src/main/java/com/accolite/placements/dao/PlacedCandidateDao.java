@@ -1,6 +1,5 @@
 package com.accolite.placements.dao;
 
-import java.sql.Date;
 import java.util.List;
 
 import com.accolite.placements.models.PlacedCandidate;

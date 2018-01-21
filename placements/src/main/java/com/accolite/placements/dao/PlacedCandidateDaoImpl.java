@@ -20,25 +20,23 @@ public class PlacedCandidateDaoImpl implements PlacedCandidateDao{
     private EntityManager entityManager;
 
 	public boolean createPlacedCandidate(PlacedCandidate placedCandidate) {
-		try {
 			entityManager.persist(placedCandidate);
 			return true;
-		}
-		catch(Exception e) {
-			return false;
-		}
 	}
 
 	public List<PlacedCandidate> getPlacedCandidatesByCompanyName(String companyName) {
-		return entityManager.createQuery("Select stu from PlacedCandidate where studentName = " + companyName).getResultList();
+		return entityManager.createQuery(
+			    "SELECT c FROM PlacedCandidate c WHERE c.placedCandidateId.companyName LIKE :custName")
+			    .setParameter("custName", companyName)
+			    .getResultList();
 	}
 	
 	public List<PlacedCandidate> getAllPlacedCandidates() {
-		return entityManager.createQuery("select stu from PlacedCandidate").getResultList();
+		return entityManager.createQuery("select stu from PlacedCandidate stu").getResultList();
 	}
 
 	public List<PlacedCandidate> getPlacedCandidatesByYear(String year) {
-		return entityManager.createQuery("Select stu from PlacedCandidate where year = " + year).getResultList();
+		return entityManager.createQuery("Select stu from PlacedCandidate stu where year = " + year).getResultList();
 	}
 
 }

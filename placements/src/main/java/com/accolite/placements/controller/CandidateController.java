@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.accolite.placements.dao.*;
 import com.accolite.placements.models.*;
@@ -22,18 +21,14 @@ public class CandidateController {
 		private String candidateName = "-1";
 		
 		@Autowired
-		private MailUtility mailUtility;
-	    
+		public MailUtility mailUtility;
+		
 	    @Autowired
 	    private CandidateDaoImpl candidateDaoImpl;
-	    
-	    @Autowired
-	    private RegisteredStudentDaoImpl registeredStudentDaoImpl;
-		
+
 	    /*** login for a user ***/
 	    @RequestMapping(value="/login/candidate", method=RequestMethod.POST)
 	    public ResponseEntity loginCandidate(@RequestBody LoginCredentials loginCredentials,HttpSession session) {
-	    	System.out.println(loginCredentials.getUsername()+" "+loginCredentials.getPassword());
 	    	Candidate candidate = candidateDaoImpl.getCandidateByName(loginCredentials.getUsername());
 	    	if(candidate == null) {
 	    		return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -48,6 +43,7 @@ public class CandidateController {
 	    	}
 	    	
 	    }
+
 	    @RequestMapping(value="/changePassword",method=RequestMethod.POST)
 	    public ResponseEntity passwordChange(@RequestBody ChangePassword changePassword,HttpSession session) {
 	    	//return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -64,6 +60,19 @@ public class CandidateController {
 	    		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	    	}
 	    }
+
+	    
+//	    @RequestMapping(value="/login/placement", method=RequestMethod.POST)
+//	    public ResponseEntity loginPlacement(@RequestBody PlacementOfficer placementOfficer,HttpSession session) {
+//	    	if(placementOfficer.getPassword().equals("admin123")) {
+//	    		session.setAttribute("username", placementOfficer.getUsername());
+//	    		return new ResponseEntity(HttpStatus.OK);
+//	    	}
+//	    	else {
+//	    		return new ResponseEntity(HttpStatus.BAD_REQUEST);
+//	    	}
+//	    }
+
 	    
 	    @RequestMapping(value="/sessionCheck",method=RequestMethod.GET)
 	    public ResponseEntity sessionCheck(HttpSession session) {

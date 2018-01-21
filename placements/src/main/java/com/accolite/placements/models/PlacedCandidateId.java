@@ -8,13 +8,18 @@ import javax.persistence.Embeddable;
 public class PlacedCandidateId implements Serializable{
 		
 	
-	String candidateName;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	String year;
 	String companyName;
-	public String getCandidateName() {
-		return candidateName;
+	
+	public String getYear() {
+		return year;
 	}
-	public void setCandidateName(String candidateName) {
-		this.candidateName = candidateName;
+	public void setYear(String Year) {
+		this.year = Year;
 	}
 	public String getCompanyName() {
 		return companyName;
@@ -22,12 +27,13 @@ public class PlacedCandidateId implements Serializable{
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((candidateName == null) ? 0 : candidateName.hashCode());
 		result = prime * result + ((companyName == null) ? 0 : companyName.hashCode());
+		result = prime * result + ((year == null) ? 0 : year.hashCode());
 		return result;
 	}
 	@Override
@@ -39,21 +45,21 @@ public class PlacedCandidateId implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		PlacedCandidateId other = (PlacedCandidateId) obj;
-		if (candidateName == null) {
-			if (other.getCandidateName() != null)
-				return false;
-		} else if (!candidateName.equals(other.getCandidateName()))
-			return false;
 		if (companyName == null) {
-			if (other.getCompanyName() != null)
+			if (other.companyName != null)
 				return false;
-		} else if (!companyName.equals(other.getCompanyName()))
+		} else if (!companyName.equals(other.companyName))
+			return false;
+		if (year == null) {
+			if (other.year != null)
+				return false;
+		} else if (!year.equals(other.year))
 			return false;
 		return true;
 	}
-	public PlacedCandidateId(String candidateName, String companyName) {
+	public PlacedCandidateId(String year, String companyName) {
 		super();
-		this.candidateName = candidateName;
+		this.year = year;
 		this.companyName = companyName;
 	}
 	public PlacedCandidateId() {

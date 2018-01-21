@@ -19,7 +19,7 @@ public class PlacedCandidate implements Serializable{
 	@EmbeddedId
 	PlacedCandidateId placedCandidateId;
 
-	String year;
+	int candidateCount;
 	double payPackage;
 	
 	public PlacedCandidateId getPlacedCandidateId() {
@@ -28,11 +28,11 @@ public class PlacedCandidate implements Serializable{
 	public void setPlacedCandidateId(PlacedCandidateId placedCandidateId) {
 		this.placedCandidateId = placedCandidateId;
 	}
-	public String getYear() {
-		return year;
+	public int getCandidateCount() {
+		return candidateCount;
 	}
-	public void setYear(String year) {
-		this.year = year;
+	public void setCandidateCount(int candidateCount) {
+		this.candidateCount = candidateCount;
 	}
 	public double getPayPackage() {
 		return payPackage;
@@ -40,10 +40,10 @@ public class PlacedCandidate implements Serializable{
 	public void setPayPackage(double payPackage) {
 		this.payPackage = payPackage;
 	}
-	public PlacedCandidate(PlacedCandidateId placedCandidateId, String year, double payPackage) {
+	public PlacedCandidate(PlacedCandidateId placedCandidateId, int candidateCount, double payPackage) {
 		super();
 		this.placedCandidateId = placedCandidateId;
-		this.year = year;
+		this.candidateCount = candidateCount;
 		this.payPackage = payPackage;
 	}
 	public PlacedCandidate() {

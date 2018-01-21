@@ -38,9 +38,9 @@ public class CompanyController {
     {
     	String msgText = "Hello, \n a new company is conducting placement drive with the following details \n " + company.getName() + "\n" + company.getDescription() + "\n" + company.getJobRole() + "\n" + company.getPayPackage() + "\n Date of interview " + company.getDate();
     	List<Candidate> candidates = candidateDaoImpl.getAllCandidates();
-//    	for(Candidate candidate : candidates) {
-//    		mailUtility.sendEmailAsync(candidate.getEmail(), "A new Company is interviewing!", msgText);
-//    	}
+    	for(Candidate candidate : candidates) {
+    		mailUtility.sendEmailAsync(candidate.getEmail(), "A new Company is interviewing!", msgText);
+    	}
         companyDaoImpl.createCompany(company);
     }
     
