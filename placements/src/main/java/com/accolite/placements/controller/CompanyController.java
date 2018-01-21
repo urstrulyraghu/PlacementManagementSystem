@@ -1,10 +1,12 @@
 package com.accolite.placements.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,14 +38,9 @@ public class CompanyController {
     {
     	String msgText = "Hello, \n a new company is conducting placement drive with the following details \n " + company.getName() + "\n" + company.getDescription() + "\n" + company.getJobRole() + "\n" + company.getPayPackage() + "\n Date of interview " + company.getDate();
     	List<Candidate> candidates = candidateDaoImpl.getAllCandidates();
-    	for(Candidate candidate : candidates) {
-<<<<<<< HEAD
-    		//Notification notification = new Notification(candidate, company);
-    		//notification.sendEmail();
-=======
-    		mailUtility.sendEmailAsync(candidate.getEmail(), "A new Company is interviewing!", msgText);
->>>>>>> daee61e967c1c08b3dc1de9b7a2a13cb21046a68
-    	}
+//    	for(Candidate candidate : candidates) {
+//    		mailUtility.sendEmailAsync(candidate.getEmail(), "A new Company is interviewing!", msgText);
+//    	}
         companyDaoImpl.createCompany(company);
     }
     
@@ -60,11 +57,7 @@ public class CompanyController {
             method=RequestMethod.GET)
     public List<Company> getAllCompanys(HttpSession session)
     {
-    	if(session.getAttribute("userName")!=null) {
-    		return companyDaoImpl.getAllCompanys();
-    	}else {
-    		return null;
-    	}        
+    	return companyDaoImpl.getAllCompanys();
     }
     
     /*** Update a Company ***/
