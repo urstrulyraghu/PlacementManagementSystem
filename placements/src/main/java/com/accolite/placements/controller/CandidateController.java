@@ -1,9 +1,8 @@
 package com.accolite.placements.controller;
 
 import java.util.List;
-
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,7 @@ import com.accolite.placements.utilities.MailUtility;
 public class CandidateController {
 	
 		private String candidateName = "-1";
-	    
+		
 		@Autowired
 		public MailUtility mailUtility;
 		
@@ -31,6 +30,9 @@ public class CandidateController {
 	    @RequestMapping(value="/login/candidate", method=RequestMethod.POST)
 	    public ResponseEntity loginCandidate(@RequestBody LoginCredentials loginCredentials,HttpSession session) {
 	    	Candidate candidate = candidateDaoImpl.getCandidateByName(loginCredentials.getUsername());
+	    	if(candidate == null) {
+	    		return new ResponseEntity(HttpStatus.BAD_REQUEST);
+	    	}
 	    	if(candidate.getPassword().equals(loginCredentials.getPassword())) {
 	    		this.candidateName = loginCredentials.getUsername();
 	    		session.setAttribute("username", loginCredentials.getUsername());
@@ -41,6 +43,24 @@ public class CandidateController {
 	    	}
 	    	
 	    }
+
+	    @RequestMapping(value="/changePassword",method=RequestMethod.POST)
+	    public ResponseEntity passwordChange(@RequestBody ChangePassword changePassword,HttpSession session) {
+	    	//return new ResponseEntity(HttpStatus.BAD_REQUEST);
+	    	String username = (String)session.getAttribute("username");
+	    	Candidate candidate = candidateDaoImpl.getCandidateByName(username);
+	    	if(username==null) {
+	    		return new ResponseEntity(HttpStatus.BAD_GATEWAY);
+	    	}
+	    	if(candidate.getPassword() == changePassword.getCurrentPassword()) {
+	    		candidate.setPassword(changePassword.getNewPassword());
+	    		candidateDaoImpl.updateCandidate(candidate);
+	    		return new ResponseEntity(HttpStatus.OK);
+	    	}else {
+	    		return new ResponseEntity(HttpStatus.BAD_REQUEST);
+	    	}
+	    }
+
 	    
 //	    @RequestMapping(value="/login/placement", method=RequestMethod.POST)
 //	    public ResponseEntity loginPlacement(@RequestBody PlacementOfficer placementOfficer,HttpSession session) {
@@ -52,11 +72,28 @@ public class CandidateController {
 //	    		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 //	    	}
 //	    }
+
+	    
+	    @RequestMapping(value="/sessionCheck",method=RequestMethod.GET)
+	    public ResponseEntity sessionCheck(HttpSession session) {
+	    	String username = (String)session.getAttribute("username");
+	    	if(username!=null) {
+	    		return new ResponseEntity<Boolean>(true,HttpStatus.OK);
+	    	}else {
+	    		return new ResponseEntity<Boolean>(false,HttpStatus.BAD_REQUEST);
+	    	}
+	    }
+	    
+	    @RequestMapping(value="/login/placement", method=RequestMethod.POST)
+	    public ResponseEntity loginPlacement(HttpSession session) {
+    		session.setAttribute("username", "placement");
+    		return new ResponseEntity(HttpStatus.OK);
+	    }
 	    
 	    /*** Apply for a company ***/
 	    @RequestMapping(value="/apply/{company}", method=RequestMethod.POST)
 	    public void applyCompany(@PathVariable("company") String companyName,HttpSession session) {
-	        String msgText = "Hello There! \n you have applied for the company" + companyName ; 
+	    	String msgText = "Hello There! \n you have applied for the company" + companyName ; 
 	        String name = (String)session.getAttribute("username");
 	        Candidate candidate = candidateDaoImpl.getCandidateByName(name);
     		mailUtility.sendEmailAsync(candidate.getEmail(), "A new Company is interviewing!", msgText);
@@ -96,6 +133,14 @@ public class CandidateController {
 	    public void updateCandidate(@RequestBody Candidate candidate)
 	    {
 	        candidateDaoImpl.updateCandidate(candidate);
+	    }
+	    
+	    @RequestMapping(value="/logout", produces="application/json",
+	    		method = RequestMethod.POST)
+	    public boolean logout(HttpSession session) {
+	    	session.removeAttribute("username");
+	    	session.removeAttribute("comapany");
+	    	return true;
 	    }
 
 }

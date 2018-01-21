@@ -82,6 +82,10 @@
 	</bean>
 	<bean id="mailUtil" class="com.accolite.placements.utilities.MailUtility" autowire="byType">
 	</bean>
+<<<<<<< HEAD
+
+=======
+>>>>>>> 65234cc3720afe2d68cbd2b69856a71f0954fe87
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
