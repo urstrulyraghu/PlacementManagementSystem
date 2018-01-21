@@ -9,3 +9,6 @@ target/
 .vscode/
 
 .scannerwork/
+*.prefs
+placements/.settings/org.eclipse.wst.common.component
+placements/.settings/org.eclipse.wst.common.project.facet.core.xml
