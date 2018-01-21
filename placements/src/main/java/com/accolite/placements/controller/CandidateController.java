@@ -1,6 +1,7 @@
 package com.accolite.placements.controller;
 
 import java.util.List;
+import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.accolite.placements.dao.*;
 import com.accolite.placements.models.*;
 import com.accolite.placements.utilities.MailUtility;
@@ -18,6 +20,8 @@ import com.accolite.placements.utilities.MailUtility;
 @RestController
 public class CandidateController {
 	
+		private static final Logger logger = Logger.getLogger(CandidateController.class);
+
 		private String candidateName = "-1";
 		
 		@Autowired
@@ -36,9 +40,11 @@ public class CandidateController {
 	    	if(candidate.getPassword().equals(loginCredentials.getPassword())) {
 	    		this.candidateName = loginCredentials.getUsername();
 	    		session.setAttribute("username", loginCredentials.getUsername());
+	    		logger.info("user " + candidateName +"has logged in ");
 	    		return new ResponseEntity(HttpStatus.OK);
 	    	}
 	    	else {
+	    		logger.error("Invalid user entry");
 	    		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	    	}
 	    	
@@ -46,7 +52,6 @@ public class CandidateController {
 
 	    @RequestMapping(value="/changePassword",method=RequestMethod.POST)
 	    public ResponseEntity passwordChange(@RequestBody ChangePassword changePassword,HttpSession session) {
-	    	//return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	    	String username = (String)session.getAttribute("username");
 	    	Candidate candidate = candidateDaoImpl.getCandidateByName(username);
 	    	if(username==null) {
@@ -55,8 +60,10 @@ public class CandidateController {
 	    	if(candidate.getPassword() == changePassword.getCurrentPassword()) {
 	    		candidate.setPassword(changePassword.getNewPassword());
 	    		candidateDaoImpl.updateCandidate(candidate);
+	    		logger.info("Password was changed");
 	    		return new ResponseEntity(HttpStatus.OK);
 	    	}else {
+	    		logger.error("Invalid user entry");
 	    		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	    	}
 	    }
@@ -86,6 +93,7 @@ public class CandidateController {
 	    
 	    @RequestMapping(value="/login/placement", method=RequestMethod.POST)
 	    public ResponseEntity loginPlacement(HttpSession session) {
+    		logger.info("user has entered");
     		session.setAttribute("username", "placement");
     		return new ResponseEntity(HttpStatus.OK);
 	    }
@@ -96,6 +104,7 @@ public class CandidateController {
 	    	String msgText = "Hello There! \n you have applied for the company" + companyName ; 
 	        String name = (String)session.getAttribute("username");
 	        Candidate candidate = candidateDaoImpl.getCandidateByName(name);
+	    	logger.info("Sent mail to " + candidate.getName() + "\n");
     		mailUtility.sendEmailAsync(candidate.getEmail(), "A new Company is interviewing!", msgText);
 	    }
 	    
@@ -104,6 +113,7 @@ public class CandidateController {
 	            produces="application/json", consumes="application/json")
 	    public void createCandidate(@RequestBody Candidate candidate)
 	    {
+	    	logger.info("Created " + candidate.getName() + "\n");
 	        candidateDaoImpl.createCandidate(candidate);
 	    }
 	    
@@ -113,6 +123,7 @@ public class CandidateController {
 	    public Candidate getCandidateById(@PathVariable("name") String name,HttpSession session){
 	    	String sessionName = (String) session.getAttribute("username");
 	    	if(sessionName!=null) {
+		    	logger.info("Retrieved " + sessionName + "\n");
 	    		return candidateDaoImpl.getCandidateByName(sessionName);
 	    	}else {
 	    		return null;
@@ -123,7 +134,8 @@ public class CandidateController {
 	    @RequestMapping(value="/candidates", produces="application/json",
 	            method=RequestMethod.GET)
 	    public List<Candidate> getAllCandidates()
-	    {
+	    {	    	
+	    	logger.info("Retrieved all candidates \n");
 	        return candidateDaoImpl.getAllCandidates();
 	    }
 	    
@@ -132,12 +144,14 @@ public class CandidateController {
 	            produces="application/json", consumes="application/json")
 	    public void updateCandidate(@RequestBody Candidate candidate)
 	    {
-	        candidateDaoImpl.updateCandidate(candidate);
+	    	logger.info("Updated " + candidate + "\n");
+	    	candidateDaoImpl.updateCandidate(candidate);
 	    }
 	    
 	    @RequestMapping(value="/logout", produces="application/json",
 	    		method = RequestMethod.POST)
 	    public boolean logout(HttpSession session) {
+	    	logger.info("user logged out\n");
 	    	session.removeAttribute("username");
 	    	session.removeAttribute("comapany");
 	    	return true;
