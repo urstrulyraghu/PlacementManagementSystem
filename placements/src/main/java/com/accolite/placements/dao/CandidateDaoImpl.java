@@ -17,17 +17,12 @@ import com.accolite.placements.dao.CandidateDao;
 public class CandidateDaoImpl implements CandidateDao{
 
 	    @PersistenceContext
-	    private EntityManager entityManager;
+		private EntityManager entityManager;
 	
 	    public boolean createCandidate(Candidate candidate)
 	    {
-	    	try {
 	    		entityManager.persist(candidate);
 	    		return true;
-	    	}
-	    	catch(Exception e) {
-	    		return false;
-	    	}
 	    }
 
 	    public Candidate getCandidateByName(String name)
@@ -43,12 +38,7 @@ public class CandidateDaoImpl implements CandidateDao{
 
 	    public boolean updateCandidate(Candidate candidate)
 	    {
-	    	try {
 	    		entityManager.merge(candidate);
 	    		return true;
-	    	}
-	    	catch(Exception e) {
-	    		return false;
-	    	}
 	    }
 }

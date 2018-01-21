@@ -34,7 +34,7 @@
 			<list>
 				<value>com.accolite.placements.models.Candidate</value>
 				<value>com.accolite.placements.models.Company</value>
-				<value>com.accolite.placements.models.RegisteredStudent</value>
+				<value>com.accolite.placements.models.PlacedCandidate</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -69,8 +69,8 @@
 		<!-- SMTP settings -->
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
-		<property name="username" value="tarun.k@accoliteindia.com" />
-		<property name="password" value="YOUR_PASSWORD" />
+		<property name="username" value="placementmanagementsystems@gmail.com" />
+		<property name="password" value="Place1234" />
 		<property name="javaMailProperties">
 			<!-- additional properties specific to JavaMail -->
 			<props>
@@ -80,13 +80,8 @@
 			</props>
 		</property>
 	</bean>
-<<<<<<< HEAD
-	<!-- <bean id="mailUtil" class="com.accolite.placements.utilities.Notification" autowire="byType">
-	</bean>  -->
-=======
 	<bean id="mailUtil" class="com.accolite.placements.utilities.MailUtility" autowire="byType">
 	</bean>
->>>>>>> daee61e967c1c08b3dc1de9b7a2a13cb21046a68
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>

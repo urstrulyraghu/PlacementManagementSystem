@@ -20,13 +20,8 @@ public class CompanyDaoImpl implements CompanyDao{
 	    
 	    public boolean createCompany(Company company)
 	    {
-	    	try {
 	    		entityManager.persist(company);
 	    		return true;
-	    	}
-	    	catch(Exception e) {
-	    		return false;
-	    	}
 	    }
 	    
 	    public Company getCompanyByName(String name)
@@ -41,13 +36,7 @@ public class CompanyDaoImpl implements CompanyDao{
 
 	    public boolean updateCompany(Company company)
 	    {
-	    	try {
 	    		entityManager.merge(company);
 	    		return true;
-	    	}
-	    	catch(Exception e) {
-	    		return false;
-	    	}
 	    }
-
 }

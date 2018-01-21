@@ -40,12 +40,22 @@ public class CompanyDaoImplTest extends TestCase {
 		companyDaoImpl.createCompany(company);
 		Company company1 = companyDaoImpl.getCompanyByName("accolite");
 		assertEquals("sde", company1.getJobRole());
+		assertEquals("accolite", company1.getName());
+		assertEquals("jdjdj",company1.getDescription());
+		assertEquals(Date.valueOf("2017-09-09"),company1.getDate());
+		assertEquals(9.80, company1.getPayPackage());
 	}
 
 	@Test
 	@Rollback(true)
 	public void testGetAllCompanys() {
-		Company company = new Company("accolite","sde","jdjdj",Date.valueOf("2017-09-09"),9.80);
+		Company company = new Company();
+		company.setName("accolite");
+		company.setDate(Date.valueOf("2017-09-09"));
+		company.setDescription("jdjdj");
+		company.setJobRole("sde");
+		company.setPayPackage(9.80);
+		
 		companyDaoImpl.createCompany(company);
 		List<Company> companies = companyDaoImpl.getAllCompanys();
 		assertEquals(company, companies.get(0));

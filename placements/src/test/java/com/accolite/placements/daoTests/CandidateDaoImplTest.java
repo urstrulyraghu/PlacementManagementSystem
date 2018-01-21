@@ -2,9 +2,6 @@ package com.accolite.placements.daoTests;
 
 import java.util.List;
 
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.weaver.NewFieldTypeMunger;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,16 +37,31 @@ public class CandidateDaoImplTest extends TestCase {
 	@Test
 	@Rollback(true)
 	public void testGetCandidateByName() {
-		Candidate candidate = new Candidate("raghu","abcd","be",45.6,56.7,78.9,"email");
+		
+		Candidate candidate = new Candidate();
+		candidate.setName("raghu");
+		candidate.setPassword("abcd");
+		candidate.setEmail("email");
+		candidate.setSscPercentage(45.6);
+		candidate.setIntPercentage(56.7);
+		candidate.setDegPercentage(78.9);
+		candidate.setEdQual("be");
+		
 		candidateDaoImpl.createCandidate(candidate);
 		Candidate candidateTest = candidateDaoImpl.getCandidateByName("raghu");
+		assertEquals("raghu", candidateTest.getName());
+		assertEquals("abcd", candidateTest.getPassword());
 		assertEquals("be", candidateTest.getEdQual());
+		assertEquals(45.6, candidateTest.getSscPercentage());
+		assertEquals(56.7, candidateTest.getIntPercentage());
+		assertEquals(78.9, candidateTest.getDegPercentage());
+		assertEquals("email", candidateTest.getEmail());
 	}
 	
 	@Test
 	@Rollback(true)
 	public void testGetAllCandidates() {
-		Candidate candidate = new Candidate("raghu","abcd","be",45.6,56.7,78.9,"email");
+		Candidate candidate = new Candidate("raghu45s","abcd","be",45.6,56.7,78.9,"emjklail");
 		candidateDaoImpl.createCandidate(candidate);
 		List<Candidate> candidates= candidateDaoImpl.getAllCandidates();
 		assertEquals(candidate, candidates.get(0));
