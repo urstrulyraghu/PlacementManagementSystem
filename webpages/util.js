@@ -1,7 +1,7 @@
 angular.module("studentModule",[]);
 angular.module("studentModule")
     .controller("studentData",function($scope,$http){
-        $http.get('http//localhost:8080/Placemets/').then(function(response){
+        $http.get('/placemets/').then(function(response){
             $scope.student = response.data;
         })
     });
@@ -94,7 +94,7 @@ angular.module("companyModule")
         }
     });
 angular.module("companyModule")
-    .controller("CompanyAddition",function($scope,$http){
+    .controller("CompanyAddition",function($scope,$http,$window){
         $scope.companyName = "";
         $scope.jobProfile = "";
         $scope.package = 0;
@@ -103,7 +103,8 @@ angular.module("companyModule")
         $scope.addCompany = function(){
             var company = {"name":$scope.companyName,"jobRole":$scope.jobProfile,"payPackage":$scope.package,"date":$scope.dateScheduled,"description":$scope.description};
             $http.post("/placements/create/company",company).then(function(){
-                alert("added successfully");
+                $window.location.href="/registerCompany.html";
+				alert("added successfully");
             });
         }
     });
