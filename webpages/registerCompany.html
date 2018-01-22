@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title>Register</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="angular.min.js"></script>
+        <script src="util.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+        <style>
+            label{
+                color: white
+            }
+            body{
+                color: lightgrey
+            }
+        </style>
+    </head>
+    <body ng-app="companyModule">
+        <nav class="navbar navbar-default" style="background-color: #3a3f46" ng-controller="logoutController">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#" style="color: white">Placement Management System</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="#" >Add Company</a>
+                    </li>
+                    <li>
+                        <a href="companies.html" style="color: white">View Companies</a>
+                    </li>
+                    <li>
+                        <a ng-click="logout()" style="color: white">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row row-offcanvas row-offcanvas-right">
+            <div class="col-6 col-md-4">
+            </div><!--/span-->
+            <div class="col-6 col-md-4">
+                <div class="jumbotron jumbotron-fluid" style="background-color: #3a3f46">
+                    <div class="container" style="background-color: #3a3f46">
+                        <form ng-app="studentModule" ng-controller="CompanyAddition">
+                            <div class="form-group">
+                                <label for="companyName">Name</label>
+                                <input type="text" ng-model="companyName" class="form-control" id="companyName" aria-describedby="emailHelp" placeholder="Company Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="jobProfile">Job Role</label>
+                                <input type="text" ng-model="jobProfile" class="form-control" id="jobProfile" aria-describedby="emailHelp" placeholder="Profile Offering">
+                            </div>
+                            <div class="form-group">
+                                <label for="package">Package</label>
+                                <input type="number" ng-model="package" class="form-control" id="package" aria-describedby="emailHelp" placeholder="Package">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input type="text" ng-model="description" class="form-control" id="description" aria-describedby="emailHelp" placeholder="Description">
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input type="date" ng-model="dateScheduled" class="form-control" id="dateScheduled" aria-describedby="emailHelp" placeholder="Scheduled Date">
+                            </div>
+                            <center><button type="submit" class="btn btn-primary" ng-click="addCompany()">Add Company</button></center>
+                        </form>
+                    </div>
+                </div>
+            </div><!--/span-->
+            <div class="col-6 col-md-4">
+            </div><!--/span-->
+        </div><!--/row-->
+    </body>
+</html>

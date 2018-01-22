@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="assets/css/Footer-with-logo.css"></link>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="angular.min.js"></script>
+    <script src="util.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: lightgrey" ng-app="statisticsModule">
+    <nav class="navbar navbar-default" style="background-color: #3a3f46">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="home.html" style="color: white">Placement Management System</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">Statistics</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-12 col-md-3">
+        </div>
+        <div class="col-12 col-md-6" ng-controller="statisticsController">
+            <center>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <input type="number" class="form-control" ng-model="yearSelected" placeholder="year">
+                    </div>
+                    <button type="submit" class="btn btn-primary" ng-click="filter()">Filter</button>
+                </form>
+            </center> 
+            <br>
+            <br>
+            <table class="table">
+                <thead>
+                    <th>Company</th>
+                    <th>No.of.Students Placed</th>
+                    <th>Year</th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="data in items">
+                        <td>{{data.placedCandidateId.companyName}}</td>
+                        <td>{{data.candidateCount}}</td>
+                        <td>{{data.placedCandidateId.year}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 col-md-3">
+        </div>
+        <!--/span-->
+    </div>
+    <!--/row-->
+</body>
+
+</html>

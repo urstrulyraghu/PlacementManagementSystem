@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <title>Profile</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="angular.min.js"></script>
+        <script src="util.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+        <style>
+            /* label{
+                color: white
+            } */
+            body{
+                color: lightgrey
+            }
+        </style>
+        <script>
+            function makeEditable(){
+                document.getElementById("name").removeAttribute("disabled");
+                document.getElementById("email").removeAttribute("disabled");
+                document.getElementById("10Cgpa").removeAttribute("disabled");
+                document.getElementById("12Cgpa").removeAttribute("disabled");
+                document.getElementById("ugCgpa").removeAttribute("disabled");
+                document.getElementById("qualification").removeAttribute("disabled");
+                document.getElementById("updateRow").setAttribute("hidden","hidden");
+                document.getElementById("optionRow1").removeAttribute("hidden");
+                document.getElementById("optionRow2").removeAttribute("hidden");
+            }
+            function reset(){
+                document.getElementById("name").setAttribute("disabled",false);
+                document.getElementById("email").setAttribute("disabled",false);
+                document.getElementById("10Cgpa").setAttribute("disabled",false);
+                document.getElementById("12Cgpa").setAttribute("disabled",false);
+                document.getElementById("ugCgpa").setAttribute("disabled",false);
+                document.getElementById("qualification").setAttribute("disabled",false);
+                document.getElementById("updateRow").removeAttribute("hidden");
+                document.getElementById("optionRow1").setAttribute("hidden","hidden");
+                document.getElementById("optionRow2").setAttribute("hidden","hidden");
+            }
+        </script>
+    </head>
+    <body ng-app="studentModule">
+        <nav class="navbar navbar-default" style="background-color: #3a3f46"  ng-controller="logoutController">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#" style="color: white">Placement Management System</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="#">Profile</a>
+                    </li>
+                    <li>
+                        <a href="viewCompanies.html" style="color: white">View Companies</a>
+                    </li>
+                    <li>
+                        <a href="changePassword.html" style="color: white">Change Password</a>
+                    </li>
+                    <li>
+                        <a ng-click="logout()" style="color: white">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row row-offcanvas row-offcanvas-right">
+            <div class="col-6 col-md-3">
+            </div><!--/span-->
+            <div class="col-6 col-md-6">
+                <div class="jumbotron jumbotron-fluid" style="background-color: #3a3f46">
+                    <div class="container" ng-controller="studentUpdate" style="background-color: #3a3f46">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Name</th>
+                                    <td><input type="email" disabled=true class="form-control" id="name" aria-describedby="emailHelp" ng-model="name" placeholder="Enter name" value={{name}}></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Qualification</th>
+                                    <td><input type="text" disabled=true class="form-control" id="qualification" aria-describedby="emailHelp" ng-model="qualification" placeholder="Enter Id" value={{qualification}}></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">10th CGPA</th>
+                                    <td><input type="number" disabled=true class="form-control" id="10Cgpa" aria-describedby="emailHelp" ng-model="cgpa10" placeholder="Enter Id" value={{cgpa10}}></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">12th CGPA</th>
+                                    <td><input type="number" disabled=true class="form-control" id="12Cgpa" aria-describedby="emailHelp" ng-model="cgpa12" placeholder="Enter Id" value={{cgpa12}}></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">UG CGPA</th>
+                                    <td><input type="number" disabled=true class="form-control" id="ugCgpa" aria-describedby="emailHelp" ng-model="cgpaUg" placeholder="Enter Id" value={{cgpaUg}}></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Email</th>
+                                    <td><input type="email" disabled=true class="form-control" id="email" aria-describedby="emailHelp" ng-model="email" placeholder="Enter Id" value={{email}}></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="2" id="updateRow"><center><button type="button" class="btn btn-primary" onclick="makeEditable()">Update</button></center></th>  
+                                    <td scope="row" hidden="hidden" id="optionRow1" align="right"><button type="button" class="btn btn-primary" ng-click="modifyStudent()">Save</button></td>
+                                    <td scope="row" hidden="hidden" id="optionRow2"><button type="button" class="btn btn-primary" onclick="reset()">Reset</button></td>
+                                </tr>
+                            </tbody>
+                        </table>                        
+                    </div>
+                </div>
+            </div><!--/span-->
+            <div class="col-6 col-md-3">
+            </div><!--/span-->
+        </div><!--/row-->
+    </body>
+</html>

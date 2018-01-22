@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title>Companies</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="angular.min.js"></script>
+        <script src="util.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+        <style>
+            td{
+                color: white
+            }
+            th{
+                color: white
+            }
+            tr:hover{
+                background-color: #3a3f46
+            }
+        </style>
+    </head>
+    <body ng-app="companyModule">
+        <nav class="navbar navbar-default" style="background-color: #3a3f46" ng-controller="logoutController">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#" style="color: white">Placement Management System</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="registerCompany.html" style="color: white">AddCompany</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">View Companies</a>
+                    </li>
+                    <li>
+                        <a ng-click="logout()" style="color: white">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row row-offcanvas row-offcanvas-right">
+            <div class="col-6 col-md-2">
+            </div><!--/span-->
+            <div class="col-6 col-md-8">
+                <div class="jumbotron jumbotron-fluid" style="background-color: #3a3f46">
+                    <div class="container" ng-controller="companyList" style="background-color: #3a3f46">
+                        <table class="table">
+                            <thead>
+                                <th>Company Name</th>
+                                <th>Package</th>
+                                <th>Job Profile</th>
+                            </thead>
+                            <tbody ng-repeat="company in companies">
+                                <tr>
+                                    <td>{{company.name}}</td>
+                                    <td>{{company.payPackage}}</td>
+                                    <td>{{company.jobRole}}</td>
+                                    <td>
+                                        <form class="form-inline">
+                                            <div class="form-group">
+                                                <input type="number" ng-model="studentsSelected" class="form-control" placeholder="count">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="number" ng-model="year" class="form-control" placeholder="year">
+                                            </div>
+                                            <button type="button" class="btn btn-primary" ng-click="update(company.name,studentsSelected,year)">close</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!--/span-->
+            <div class="col-6 col-md-2">
+            </div><!--/span-->
+        </div><!--/row-->
+    </body>
+</html>

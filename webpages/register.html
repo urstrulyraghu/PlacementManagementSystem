@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <title>Register</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link  rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" href="assets/css/Footer-with-logo.css"></link>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="angular.min.js"></script>
+        <script src="util.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+        <style>
+            label{
+                color: white
+            }
+            body{
+                color: lightgrey
+            }
+        </style>
+    </head>
+    <body ng-app="studentModule" style="background-color: lightgrey">
+        <nav class="navbar navbar-default" style="background-color: #3a3f46">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#" style="color: white">Placement Management System</a>
+                </div>
+            </div>
+        </nav>
+        <div class="row row-offcanvas row-offcanvas-right">
+            <div class="col-6 col-md-4">
+            </div><!--/span-->
+            <div class="col-6 col-md-4">
+                <div class="jumbotron jumbotron-fluid" style="background-color: #3a3f46">
+                    <div class="container" style="background-color: #3a3f46">
+                        <form ng-controller="studentRegister">
+                            <div class="form-group">
+                                <label for="name">Student Name</label>
+                                <input type="text" ng-model="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter Id">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="text" ng-model="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter mail Id">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" ng-model="password" class="form-control" id="password" placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="rePassword">Re-enter Password</label>
+                                <input type="password" class="form-control" id="re-password" placeholder="re-enter Password">
+                            </div>
+                            <div class="form-group">
+                                <label for="qualification">Qualification</label>
+                                <input type="text" ng-model="edQual" class="form-control" id="qualification" aria-describedby="emailHelp" placeholder="Qualification">
+                            </div>
+                            <div class="form-group">
+                                <label for="cgpa10">CGPA-10th</label>
+                                <input type="number" ng-model="sscPercentage" class="form-control" id="cgpa10" aria-describedby="emailHelp" placeholder="CGPA">
+                            </div>
+                            <div class="form-group">
+                                <label for="cgpa12">CGPA-12th</label>
+                                <input type="number" ng-model="intPercentage" class="form-control" id="cgpa12" aria-describedby="emailHelp" placeholder="CGPA">
+                            </div>
+                            <div class="form-group">
+                                <label for="cgpaUG">CGPA-UG</label>
+                                <input type="number" ng-model="degPercentage" class="form-control" id="cgpaUg" aria-describedby="emailHelp" placeholder="CGPA">
+                            </div>
+                            <!-- <div class="form-group">
+                                <label for="skills">Skills</label>
+                                <input type="email" ng-model="skills" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Skills">
+                            </div> -->
+                            <button type="button" class="btn btn-primary" ng-click="addStudent()">Submit</button>
+                            <a href="home.html"><button type="button" class="btn btn-primary">Login</button></a>
+                        </form>
+                    </div>
+                </div>
+            </div><!--/span-->
+            <div class="col-6 col-md-4">
+            </div><!--/span-->
+        </div><!--/row-->
+        <footer id="myFooter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h5>Get started</h5>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Sign up</a></li>
+                            <li><a href="#">Downloads</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5>About us</h5>
+                        <ul>
+                            <li><a href="#">Company Information</a></li>
+                            <li><a href="#">Contact us</a></li>
+                            <li><a href="#">Reviews</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5>Support</h5>
+                        <ul>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Help desk</a></li>
+                            <li><a href="#">Forums</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3 info">
+                        <h5>Information</h5>
+                        <p> Lorem ipsum dolor amet, consectetur adipiscing elit. Etiam consectetur aliquet aliquet. Interdum et malesuada fames ac ante ipsum primis in faucibus. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="second-bar">
+                <div class="container">
+                    <h2 class="logo"><a href="#"> LOGO </a></h2>
+                    <div class="social-icons">
+                        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

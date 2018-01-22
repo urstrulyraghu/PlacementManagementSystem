@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>Companies</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="angular.min.js"></script>
+        <script src="util.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+        <style>
+            text{
+                color: white
+            }
+        </style>
+    </head>
+    <body ng-app="companyModule" style="background-color: lightgrey">
+        <nav class="navbar navbar-default" style="background-color: #3a3f46" ng-controller="logoutController">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#" style="color: white">Placement Management System</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="profile.html" style="color: white">Profile</a>
+                    </li>
+                    <li class="active">
+                        <a href="viewCompanies.html">View Companies</a>
+                    </li>
+                    <li>
+                        <a href="changePassword.html" style="color: white">Change Password</a>
+                    </li>
+                    <li>
+                        <a ng-click="logout()" style="color: white">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="row row-offcanvas row-offcanvas-right">
+            <div class="col-6 col-md-3">
+            </div><!--/span-->
+            <div class="col-6 col-md-6" ng-app="companyModule">
+                <div class="jumbotron jumbotron-fluid"  ng-controller="companyList" style="background-color: #3a3f46" >
+                    <div class="container" style="background-color: #3a3f46" >
+                        <div class="card card-inverse" style="background-color: #333; border-color: #333;" ng-repeat="company in companies">
+                            <div class="card-block">
+                                <h3 class="card-title" style="color: white">{{company.name}}</h3>
+                                <p class="card-text" style="color: white">{{company.description}}</p>
+                                <p class="card-text" style="color: white" style="font-size: 12px">{{company.payPackage}} Lpa</p>
+                                <a href="#" class="btn btn-primary" style="color: white" ng-click="applyCompany(company.name)">Apply</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/span-->
+            <div class="col-6 col-md-3">
+            </div><!--/span-->
+        </div><!--/row-->
+    </body>
+</html>
