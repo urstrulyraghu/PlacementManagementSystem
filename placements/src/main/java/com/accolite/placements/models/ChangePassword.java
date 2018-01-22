@@ -3,6 +3,15 @@ package com.accolite.placements.models;
 public class ChangePassword {
 	private String currentPassword;
 	private String newPassword;
+	
+	public ChangePassword(String currentPassword, String newPassword) {
+		super();
+		this.currentPassword = currentPassword;
+		this.newPassword = newPassword;
+	}
+	public ChangePassword() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getCurrentPassword() {
 		return currentPassword;
 	}

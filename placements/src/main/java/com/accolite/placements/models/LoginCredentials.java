@@ -3,6 +3,17 @@ package com.accolite.placements.models;
 public class LoginCredentials {
 	private String username;
 	private String password;
+	
+	
+	public LoginCredentials() {
+		super();
+	}
+	
+	public LoginCredentials(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
 	public String getUsername() {
 		return username;
 	}
