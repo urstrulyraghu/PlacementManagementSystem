@@ -1,5 +1,6 @@
 package com.accolite.placements.controllerTests;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -15,6 +16,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
+
+import com.accolite.placements.controller.CandidateController;
 import com.accolite.placements.dao.CandidateDaoImpl;
 import com.accolite.placements.models.Candidate;
 import com.google.gson.Gson;
@@ -29,6 +32,8 @@ import junit.framework.TestCase;
 @ContextConfiguration(locations = { "file:./src/main/webapp/WEB-INF/placement-servlet.xml" })
 @WebAppConfiguration
 public class CandidateControllerTest extends TestCase {
+
+	private static final Logger logger = Logger.getLogger(CandidateControllerTest.class);
 
 	private MockMvc mockMvc;
 	
@@ -62,7 +67,7 @@ public class CandidateControllerTest extends TestCase {
 					.content(candidateJson))
 			.andExpect(status().isOk());
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 
 
@@ -117,7 +122,7 @@ public class CandidateControllerTest extends TestCase {
 					.content(candidateJson))
 			.andExpect(status().isOk());
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 	}
 

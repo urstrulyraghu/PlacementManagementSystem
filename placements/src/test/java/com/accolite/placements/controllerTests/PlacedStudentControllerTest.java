@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -21,6 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.accolite.placements.controller.CandidateController;
 import com.accolite.placements.dao.PlacedCandidateDaoImpl;
 import com.accolite.placements.models.PlacedCandidate;
 import com.accolite.placements.models.PlacedCandidateId;
@@ -30,6 +32,8 @@ import com.google.gson.Gson;
 @ContextConfiguration(locations = { "file:./src/main/webapp/WEB-INF/placement-servlet.xml" })
 @WebAppConfiguration
 public class PlacedStudentControllerTest {
+
+	private static final Logger logger = Logger.getLogger(PlacedStudentControllerTest.class);
 
 	private MockMvc mockMvc;
 
@@ -55,7 +59,7 @@ public class PlacedStudentControllerTest {
 					.content(placedCandidateJson))
 			.andExpect(status().isOk());
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 
 	}
