@@ -24,12 +24,6 @@ public class PlacedCandidateDaoImpl implements PlacedCandidateDao{
 			return true;
 	}
 
-	public List<PlacedCandidate> getPlacedCandidatesByCompanyName(String companyName) {
-		return entityManager.createQuery(
-			    "SELECT c FROM PlacedCandidate c WHERE c.placedCandidateId.companyName LIKE :custName")
-			    .setParameter("custName", companyName)
-			    .getResultList();
-	}
 	
 	public List<PlacedCandidate> getAllPlacedCandidates() {
 		return entityManager.createQuery("select stu from PlacedCandidate stu").getResultList();

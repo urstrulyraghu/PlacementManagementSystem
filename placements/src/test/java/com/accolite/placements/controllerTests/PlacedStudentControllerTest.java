@@ -96,22 +96,4 @@ public class PlacedStudentControllerTest {
 		}	
 	}
 
-	@Test
-	public void testGetPlacedCandidatesByCompany() {
-		
-		PlacedCandidate placedCandidate = new PlacedCandidate(new PlacedCandidateId("2017", "accolite"), 45, 9.80);
-		List<PlacedCandidate> placedCandidates = Arrays.asList(placedCandidate);
-		when(placedCandidateDaoImplMock.getAllPlacedCandidates()).thenReturn(placedCandidates);
-		
-		try {
-			mockMvc.perform(get("/placedCandidates/{company}","accolite"))
-						.andExpect(status().isOk())
-						.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-						.andExpect(jsonPath("$.candidateCount", is(45)));
-
-		} catch (Exception e) {
-			e.getMessage();
-		}
-	}
-
 }

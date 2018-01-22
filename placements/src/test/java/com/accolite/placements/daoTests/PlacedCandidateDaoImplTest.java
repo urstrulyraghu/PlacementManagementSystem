@@ -32,14 +32,6 @@ public class PlacedCandidateDaoImplTest extends TestCase {
 		assertTrue(result);
 	}
 
-	@Test
-	@Rollback(true)
-	public void testGetPlacedCandidatesByCompanyName() {
-		PlacedCandidate placedCandidate = new PlacedCandidate(new PlacedCandidateId("2017", "accolite"), 45, 9.80);
-		placedCandidateDaoImpl.createPlacedCandidate(placedCandidate);
-		List<PlacedCandidate> placedCandidates = placedCandidateDaoImpl.getPlacedCandidatesByCompanyName("accolite");
-		assertEquals(9.80, placedCandidates.get(0).getPayPackage());
-	}
 
 	@Test
 	@Rollback(true)

@@ -39,11 +39,5 @@ public class PlacedStudentController {
 		return placedCandidatedaoImpl.getPlacedCandidatesByYear(year);
 	}
 	
-	/*** GetPlaced Students by Company ***/
-	@RequestMapping(value="/placedCandidates/{company}",produces="application/json",
-			method=RequestMethod.GET)
-	public List<PlacedCandidate> getPlacedCandidatesByCompany(@PathVariable("company")String company){
-		return placedCandidatedaoImpl.getPlacedCandidatesByCompanyName(company);
-	}
 	
 }
