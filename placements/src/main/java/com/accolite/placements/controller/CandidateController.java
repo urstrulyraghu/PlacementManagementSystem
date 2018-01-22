@@ -73,9 +73,9 @@ public class CandidateController {
 	    public ResponseEntity sessionCheck(HttpSession session) {
 	    	String username = (String)session.getAttribute("username");
 	    	if(username!=null) {
-	    		return new ResponseEntity<String>(username,HttpStatus.OK);
+	    		return new ResponseEntity<Boolean>(true,HttpStatus.OK);
 	    	}else {
-	    		return new ResponseEntity<String>("",HttpStatus.BAD_REQUEST);
+	    		return new ResponseEntity<Boolean>(false,HttpStatus.BAD_REQUEST);
 	    	}
 	    }
 	    

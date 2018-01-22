@@ -111,17 +111,6 @@ angular.module("companyModule")
 angular.module("loginModule",[]);
 angular.module("loginModule")
     .controller("loginController",function($scope,$http,$window){
-        $http.get("/placements/sessionCheck").then(function(response){
-            if(response.data=="placements"){
-                $window.location.href="/registerCompany.html";
-            }else if(response.data==""){
-                $window.location.href="/home.html";
-            }else{
-                $window.location.href="/profile.html";
-            }
-        },function(){
-            $window.location.href="/home.html";
-        });
         $scope.name="";
         $scope.password="";
         $scope.loginAs="";
