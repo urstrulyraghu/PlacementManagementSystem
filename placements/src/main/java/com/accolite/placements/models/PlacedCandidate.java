@@ -1,8 +1,6 @@
 package com.accolite.placements.models;
 
 import java.io.Serializable;
-import java.sql.Date;
-
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
