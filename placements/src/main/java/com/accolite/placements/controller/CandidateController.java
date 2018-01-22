@@ -62,18 +62,6 @@ public class CandidateController {
 	    }
 
 	    
-//	    @RequestMapping(value="/login/placement", method=RequestMethod.POST)
-//	    public ResponseEntity loginPlacement(@RequestBody PlacementOfficer placementOfficer,HttpSession session) {
-//	    	if(placementOfficer.getPassword().equals("admin123")) {
-//	    		session.setAttribute("username", placementOfficer.getUsername());
-//	    		return new ResponseEntity(HttpStatus.OK);
-//	    	}
-//	    	else {
-//	    		return new ResponseEntity(HttpStatus.BAD_REQUEST);
-//	    	}
-//	    }
-
-	    
 	    @RequestMapping(value="/sessionCheck",method=RequestMethod.GET)
 	    public ResponseEntity sessionCheck(HttpSession session) {
 	    	String username = (String)session.getAttribute("username");
