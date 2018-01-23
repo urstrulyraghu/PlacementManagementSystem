@@ -10,7 +10,7 @@ public class ChangePassword {
 		this.newPassword = newPassword;
 	}
 	public ChangePassword() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 	public String getCurrentPassword() {
 		return currentPassword;

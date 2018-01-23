@@ -1,4 +1,4 @@
-package com.accolite.placements.controllerTests;
+package com.accolite.placements.controllertests;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
@@ -24,7 +24,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.accolite.placements.controller.CandidateController;
 import com.accolite.placements.dao.CompanyDaoImpl;
 import com.accolite.placements.models.Company;
 import com.google.gson.Gson;
@@ -35,6 +34,11 @@ import junit.framework.TestCase;
 @ContextConfiguration(locations = { "file:./src/main/webapp/WEB-INF/placement-servlet.xml" })
 @WebAppConfiguration
 public class CompanyControllerTest extends TestCase {
+
+	static final String NAME = "accolite";
+	static final String JOBROLE = "sde";
+	static final String DESCRIPTION = "sbc";
+	static final String DATE = "2017-09-09";
 
 	private static final Logger logger = Logger.getLogger(CompanyControllerTest.class);
 
@@ -50,7 +54,7 @@ public class CompanyControllerTest extends TestCase {
 	
 	@Test
 	public void testCreateCompany() {
-		Company company = new Company("accolite","sde","jdjdj",Date.valueOf("2017-09-09"),9.80);
+		Company company = new Company(NAME,JOBROLE,DESCRIPTION,Date.valueOf(DATE),9.80);
 		
 		when(companyDaoImplMock.createCompany(company)).thenReturn(true);
 
@@ -69,20 +73,20 @@ public class CompanyControllerTest extends TestCase {
 
 	@Test
 	public void testGetCompanyByName() throws Exception {
-		Company company = new Company("accolite","sde","jdjdj",Date.valueOf("2017-09-09"),9.80);
+		Company company = new Company(NAME,JOBROLE,DESCRIPTION,Date.valueOf(DATE),9.80);
 		
-		when(companyDaoImplMock.getCompanyByName("accolite")).thenReturn(company);
+		when(companyDaoImplMock.getCompanyByName(NAME)).thenReturn(company);
 		
-		mockMvc.perform(get("/company/{name}","raghu"))
+		mockMvc.perform(get("/company/{NAME}","raghu"))
 					.andExpect(status().isOk())
 					.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-					.andExpect(jsonPath("$.name", is("accolite")))
-					.andExpect(jsonPath("$.jobRole", is("sde")));
+					.andExpect(jsonPath("$.NAME", is(NAME)))
+					.andExpect(jsonPath("$.JOBROLE", is(JOBROLE)));
 	}
 
 	@Test
 	public void testGetAllCompanys() {
-		Company company = new Company("accolite","sde","jdjdj",Date.valueOf("2017-09-09"),9.80);
+		Company company = new Company(NAME,JOBROLE,DESCRIPTION,Date.valueOf(DATE),9.80);
 		List<Company> companys = Arrays.asList(company);
 		when(companyDaoImplMock.getAllCompanys()).thenReturn(companys);
 		
@@ -90,7 +94,7 @@ public class CompanyControllerTest extends TestCase {
 			mockMvc.perform(get("/companys"))
 						.andExpect(status().isOk())
 						.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-						.andExpect(jsonPath("$.name", is("accolite")));
+						.andExpect(jsonPath("$.NAME", is(NAME)));
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -100,7 +104,7 @@ public class CompanyControllerTest extends TestCase {
 
 	@Test
 	public void testUpdateCompany() {
-		Company company = new Company("accolite","sde","jdjdj",Date.valueOf("2017-09-09"),9.80);
+		Company company = new Company(NAME,JOBROLE,DESCRIPTION,Date.valueOf(DATE),9.80);
 
         when(companyDaoImplMock.updateCompany(company)).thenReturn(true);
 

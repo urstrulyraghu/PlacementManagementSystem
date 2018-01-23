@@ -18,8 +18,8 @@ public class PlacedCandidateId implements Serializable{
 	public String getYear() {
 		return year;
 	}
-	public void setYear(String Year) {
-		this.year = Year;
+	public void setYear(String year) {
+		this.year = year;
 	}
 	public String getCompanyName() {
 		return companyName;

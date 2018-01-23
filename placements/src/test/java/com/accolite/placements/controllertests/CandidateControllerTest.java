@@ -1,30 +1,31 @@
-package com.accolite.placements.controllerTests;
+package com.accolite.placements.controllertests;
+
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.hamcrest.Matchers.*;
-import static org.mockito.Mockito.*;
 
-import com.accolite.placements.controller.CandidateController;
 import com.accolite.placements.dao.CandidateDaoImpl;
 import com.accolite.placements.models.Candidate;
 import com.google.gson.Gson;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import java.util.Arrays;
-import java.util.List;
 
 import junit.framework.TestCase;
 
@@ -35,6 +36,11 @@ public class CandidateControllerTest extends TestCase {
 
 	private static final Logger logger = Logger.getLogger(CandidateControllerTest.class);
 
+	static final String NAME = "raghu";
+	static final String PWORD = "accolite";
+	static final String EDQUAL = "Be";
+	static final String EMAIL = "raghu@gmail.com";
+	
 	private MockMvc mockMvc;
 	
 	@Mock
@@ -44,18 +50,10 @@ public class CandidateControllerTest extends TestCase {
 	public void setup() {
 		candidateDaoImplMock = Mockito.mock(CandidateDaoImpl.class);
 	}
-	
-	public void testLoginCandidate() {
-		
-	}
-
-	public void testApplyCompany() {
-
-	}
 
 	@Test
 	public void testCreateCandidate() {
-		Candidate candidate = new Candidate("rdhusdf", "accolite","be",89.0,78.0,67.9,"raghu@gmfgajkil.com");
+		Candidate candidate = new Candidate(NAME, PWORD,EDQUAL,89.0,78.0,67.9,"NAME@gmfgajkil.com");
 
         when(candidateDaoImplMock.createCandidate(candidate)).thenReturn(true);
 
@@ -75,22 +73,22 @@ public class CandidateControllerTest extends TestCase {
 
 	@Test
 	public void testGetCandidateById() throws Exception {
-		Candidate candidate = new Candidate("raghu", "accolite","be",89.0,78.0,67.9,"raghu@gmail.com");
+		Candidate candidate = new Candidate(NAME, PWORD,EDQUAL,89.0,78.0,67.9,EMAIL);
 		
-		when(candidateDaoImplMock.getCandidateByName("raghu")).thenReturn(candidate);
+		when(candidateDaoImplMock.getCandidateByName(NAME)).thenReturn(candidate);
 		
-		mockMvc.perform(get("/candidate/{name}","raghu"))
+		mockMvc.perform(get("/candidate/{NAME}",NAME))
 					.andExpect(status().isOk())
 					.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-					.andExpect(jsonPath("$.name", is("raghu")))
-					.andExpect(jsonPath("$.password", is("accolite")))
-					.andExpect(jsonPath("$.edQual", is("be")))
+					.andExpect(jsonPath("$.NAME", is(NAME)))
+					.andExpect(jsonPath("$.PWORD", is(PWORD)))
+					.andExpect(jsonPath("$.EDQUAL", is(EDQUAL)))
 					.andExpect(jsonPath("$.sscPercentage", is(89.0)));
 	}
 
 	@Test
 	public void testGetAllCandidates() {
-		Candidate candidate = new Candidate("raghu", "accolite","be",89.0,78.0,67.9,"raghu@gmail.com");
+		Candidate candidate = new Candidate(NAME, PWORD,EDQUAL,89.0,78.0,67.9,EMAIL);
 		List<Candidate> candidates = Arrays.asList(candidate);
 		when(candidateDaoImplMock.getAllCandidates()).thenReturn(candidates);
 		
@@ -98,19 +96,18 @@ public class CandidateControllerTest extends TestCase {
 			mockMvc.perform(get("/candidates"))
 						.andExpect(status().isOk())
 						.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-						.andExpect(jsonPath("$.name", is("raghu")))
-						.andExpect(jsonPath("$.password", is("accolite")))
-						.andExpect(jsonPath("$.edQual", is("be")))
+						.andExpect(jsonPath("$.NAME", is(NAME)))
+						.andExpect(jsonPath("$.PWORD", is(PWORD)))
+						.andExpect(jsonPath("$.EDQUAL", is(EDQUAL)))
 						.andExpect(jsonPath("$.sscPercentage", is(89.0)));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.getMessage();
 		}	
 	}
 
 	@Test
 	public void testUpdateCandidate() {
-		Candidate candidate = new Candidate("raghu", "accolite","be",89.0,78.0,67.9,"raghu@gmail.com");
+		Candidate candidate = new Candidate(NAME, PWORD,EDQUAL,89.0,78.0,67.9,EMAIL);
 
         when(candidateDaoImplMock.updateCandidate(candidate)).thenReturn(true);
 

@@ -1,4 +1,4 @@
-package com.accolite.placements.daoTests;
+package com.accolite.placements.daotests;
 
 import java.util.List;
 
@@ -21,6 +21,11 @@ import junit.framework.TestCase;
 @Transactional
 public class CandidateDaoImplTest extends TestCase {
 
+	static final String NAME = "raghu";
+	static final String PWORD = "accolite";
+	static final String EDQUAL = "Be";
+	static final String EMAIL = "raghu@gmail.com";
+	
 	static ApplicationContext context;
 
 	@Autowired
@@ -29,7 +34,7 @@ public class CandidateDaoImplTest extends TestCase {
 	@Test
 	@Rollback(true)
 	public void testCreateCandidate() {
-		Candidate candidate = new Candidate("raghu","abcd","be",45.6,56.7,78.9,"email");
+		Candidate candidate = new Candidate(NAME,PWORD,EDQUAL,45.6,56.7,78.9,EMAIL);
 		boolean result = candidateDaoImpl.createCandidate(candidate);
 		assertTrue(result);
 	}
@@ -39,29 +44,29 @@ public class CandidateDaoImplTest extends TestCase {
 	public void testGetCandidateByName() {
 		
 		Candidate candidate = new Candidate();
-		candidate.setName("raghu");
-		candidate.setPassword("abcd");
-		candidate.setEmail("email");
+		candidate.setName(NAME);
+		candidate.setPassword(PWORD);
+		candidate.setEmail(EMAIL);
 		candidate.setSscPercentage(45.6);
 		candidate.setIntPercentage(56.7);
 		candidate.setDegPercentage(78.9);
-		candidate.setEdQual("be");
+		candidate.setEdQual(EDQUAL);
 		
 		candidateDaoImpl.createCandidate(candidate);
-		Candidate candidateTest = candidateDaoImpl.getCandidateByName("raghu");
-		assertEquals("raghu", candidateTest.getName());
-		assertEquals("abcd", candidateTest.getPassword());
-		assertEquals("be", candidateTest.getEdQual());
+		Candidate candidateTest = candidateDaoImpl.getCandidateByName(NAME);
+		assertEquals(NAME, candidateTest.getName());
+		assertEquals(PWORD, candidateTest.getPassword());
+		assertEquals(EDQUAL, candidateTest.getEdQual());
 		assertEquals(45.6, candidateTest.getSscPercentage());
 		assertEquals(56.7, candidateTest.getIntPercentage());
 		assertEquals(78.9, candidateTest.getDegPercentage());
-		assertEquals("email", candidateTest.getEmail());
+		assertEquals(EMAIL, candidateTest.getEmail());
 	}
 	
 	@Test
 	@Rollback(true)
 	public void testGetAllCandidates() {
-		Candidate candidate = new Candidate("raghu45s","abcd","be",45.6,56.7,78.9,"emjklail");
+		Candidate candidate = new Candidate(NAME,PWORD,EDQUAL,45.6,56.7,78.9,"email");
 		candidateDaoImpl.createCandidate(candidate);
 		List<Candidate> candidates= candidateDaoImpl.getAllCandidates();
 		assertEquals(candidate, candidates.get(0));
@@ -70,9 +75,9 @@ public class CandidateDaoImplTest extends TestCase {
 	@Test
 	@Rollback(true)
 	public void testUpdateCandidate() {
-		Candidate candidate = new Candidate("raghu","abcd","be",45.6,56.7,78.9,"email");
+		Candidate candidate = new Candidate(NAME,PWORD,EDQUAL,45.6,56.7,78.9,EMAIL);
 		candidateDaoImpl.createCandidate(candidate);
-		Candidate candidate1 = new Candidate("raghu","abcd","be",49.6,76.7,78.9,"email");
+		Candidate candidate1 = new Candidate(NAME,PWORD,EDQUAL,49.6,76.7,78.9,EMAIL);
 		boolean result = candidateDaoImpl.updateCandidate(candidate1);
 		assertTrue(result);
 	}

@@ -1,4 +1,4 @@
-package com.accolite.placements.controllerTests;
+package com.accolite.placements.controllertests;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
@@ -22,7 +22,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.accolite.placements.controller.CandidateController;
 import com.accolite.placements.dao.PlacedCandidateDaoImpl;
 import com.accolite.placements.models.PlacedCandidate;
 import com.accolite.placements.models.PlacedCandidateId;
@@ -33,6 +32,9 @@ import com.google.gson.Gson;
 @WebAppConfiguration
 public class PlacedStudentControllerTest {
 
+	static final String NAME = "accolite";
+	static final String YEAR = "2017";
+	
 	private static final Logger logger = Logger.getLogger(PlacedStudentControllerTest.class);
 
 	private MockMvc mockMvc;
@@ -48,7 +50,7 @@ public class PlacedStudentControllerTest {
 	@Test
 	public void testCreatePlacedCandidate() {
 		
-		PlacedCandidate placedCandidate = new PlacedCandidate(new PlacedCandidateId("2017", "accolite"), 45, 9.80);
+		PlacedCandidate placedCandidate = new PlacedCandidate(new PlacedCandidateId(YEAR, NAME), 45, 9.80);
 		when(placedCandidateDaoImplMock.createPlacedCandidate(placedCandidate)).thenReturn(true);
 
         Gson gson = new Gson();
@@ -67,7 +69,7 @@ public class PlacedStudentControllerTest {
 	@Test
 	public void testGetAllPlacedCandidates() {
 		
-		PlacedCandidate placedCandidate = new PlacedCandidate(new PlacedCandidateId("2017", "accolite"), 45, 9.80);
+		PlacedCandidate placedCandidate = new PlacedCandidate(new PlacedCandidateId(YEAR, NAME), 45, 9.80);
 		List<PlacedCandidate> placedCandidates = Arrays.asList(placedCandidate);
 		when(placedCandidateDaoImplMock.getAllPlacedCandidates()).thenReturn(placedCandidates);
 		
@@ -85,7 +87,7 @@ public class PlacedStudentControllerTest {
 	@Test
 	public void testGetPlacedCandidatesByYear() {
 		
-		PlacedCandidate placedCandidate = new PlacedCandidate(new PlacedCandidateId("2017", "accolite"), 45, 9.80);
+		PlacedCandidate placedCandidate = new PlacedCandidate(new PlacedCandidateId(YEAR, NAME), 45, 9.80);
 		List<PlacedCandidate> placedCandidates = Arrays.asList(placedCandidate);
 		when(placedCandidateDaoImplMock.getAllPlacedCandidates()).thenReturn(placedCandidates);
 		

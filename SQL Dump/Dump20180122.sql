@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `placements` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `placements`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: placements
@@ -26,12 +24,12 @@ DROP TABLE IF EXISTS `candidate`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `candidate` (
   `name` varchar(45) NOT NULL,
-  `password` varchar(45) DEFAULT NULL,
-  `edQual` varchar(45) DEFAULT NULL,
+  `password` varchar(45) NOT NULL,
+  `edQual` varchar(45) NOT NULL,
   `degPercentage` double NOT NULL,
   `intPercentage` double NOT NULL,
   `sscPercentage` double NOT NULL,
-  `email` varchar(45) DEFAULT NULL,
+  `email` varchar(45) NOT NULL,
   PRIMARY KEY (`name`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -43,7 +41,6 @@ CREATE TABLE `candidate` (
 
 LOCK TABLES `candidate` WRITE;
 /*!40000 ALTER TABLE `candidate` DISABLE KEYS */;
-INSERT INTO `candidate` VALUES ('raghu','rr','B.Tech',9,9,9,'raghu@gmail.com'),('raghuvardhan','raghu','B.Tech',9.8,9.8,9.8,'karanamraghuvardhan12@gmail.com'),('sukesh','kk','M.Tech',7.6,9.4,9.1,'sukeshkancharla@gmail.com');
 /*!40000 ALTER TABLE `candidate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +54,7 @@ DROP TABLE IF EXISTS `company`;
 CREATE TABLE `company` (
   `name` varchar(45) NOT NULL,
   `jobRole` varchar(45) DEFAULT NULL,
-  `description` varchar(200) DEFAULT NULL,
+  `description` blob,
   `date` date DEFAULT NULL,
   `payPackage` double DEFAULT NULL,
   PRIMARY KEY (`name`)
@@ -70,7 +67,6 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES ('Accolite','SD','Java and Angular JS and DS','2018-01-22',10);
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,9 +102,9 @@ DROP TABLE IF EXISTS `placedcandidate`;
 CREATE TABLE `placedcandidate` (
   `companyName` varchar(255) NOT NULL,
   `payPackage` double NOT NULL,
-  `year` varchar(20) NOT NULL,
+  `year` varchar(45) DEFAULT NULL,
   `candidateCount` int(11) NOT NULL,
-  PRIMARY KEY (`companyName`,`year`)
+  PRIMARY KEY (`companyName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -118,7 +114,6 @@ CREATE TABLE `placedcandidate` (
 
 LOCK TABLES `placedcandidate` WRITE;
 /*!40000 ALTER TABLE `placedcandidate` DISABLE KEYS */;
-INSERT INTO `placedcandidate` VALUES ('Accolite',0,'2010',10),('Accolite',0,'2018',10);
 /*!40000 ALTER TABLE `placedcandidate` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -154,4 +149,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-22 10:26:16
+-- Dump completed on 2018-01-22 16:51:26
