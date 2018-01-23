@@ -6,16 +6,9 @@
         <link  rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
         <script src="util.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-        <style>
-            /* label{
-                color: white
-            } */
-            body{
-                color: lightgrey
-            }
-        </style>
         <script>
             function makeEditable(){
                 document.getElementById("name").removeAttribute("disabled");
@@ -42,27 +35,6 @@
         </script>
     </head>
     <body ng-app="studentModule">
-        <nav class="navbar navbar-default" style="background-color: #3a3f46"  ng-controller="logoutController">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#" style="color: white">Placement Management System</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="#">Profile</a>
-                    </li>
-                    <li>
-                        <a href="viewCompanies.html" style="color: white">View Companies</a>
-                    </li>
-                    <li>
-                        <a href="changePassword.html" style="color: white">Change Password</a>
-                    </li>
-                    <li>
-                        <a ng-click="logout()" style="color: white">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
         <div class="row row-offcanvas row-offcanvas-right">
             <div class="col-6 col-md-3">
             </div><!--/span-->
