@@ -1,4 +1,17 @@
-angular.module("studentModule",[]);
+angular.module('studentModule',["ngRoute"]);
+angular.module('studentModule')
+    .config(function($routeProvider){
+        $routeProvider.when("/",{templateUrl : "login.html"})
+        .when("/login",{templateUrl:"login.html"})
+        .when("/statistics",{templateUrl:"statistics.html"})
+        .when("/register",{templateUrl:"register.html"})
+        .when("/studentLogin",{templateUrl:"student.html"})
+        .when("/studentLogin/",{templateUrl:"profile.html"})
+        .when("/studentLogin/studentProfile",{templateUrl:"profile.html"})
+        .when("/studentLogin/studentViewCompanies",{templateUrl:"viewCompanies.html"})
+        .when("/studentLogin/studentChangePassword",{templateUrl:"changePassword.html"})
+        .otherwise({templateUrl:"login.html"});
+    });
 angular.module("studentModule")
     .controller("studentData",function($scope,$http){
         $http.get('/placemets/').then(function(response){
@@ -66,8 +79,7 @@ angular.module("studentModule")
            });
         }
     });
-angular.module("companyModule",[]);
-angular.module("companyModule")
+angular.module("studentModule")
     .controller("companyList",function($scope,$http,$window){
         $http.get("/placements/sessionCheck").then(function(response){
             if(!response.data){
@@ -93,7 +105,7 @@ angular.module("companyModule")
             });
         }
     });
-angular.module("companyModule")
+angular.module("studentModule")
     .controller("CompanyAddition",function($scope,$http,$window){
         $scope.companyName = "";
         $scope.jobProfile = "";
@@ -108,9 +120,8 @@ angular.module("companyModule")
             });
         }
     });
-angular.module("loginModule",[]);
-angular.module("loginModule")
-    .controller("loginController",function($scope,$http,$window){
+angular.module("studentModule")
+    .controller("loginController",["$location",function($scope,$http,$window){
         $scope.name="";
         $scope.password="";
         $scope.loginAs="";
@@ -127,22 +138,14 @@ angular.module("loginModule")
             }else{
                 console.log("student");
                 $http.post("/placements/login/candidate",loginCredentials).then(function(){
-                    $window.location.href = "/profile.html";
+                    $location.path("/studentLogin");
                 },function(){
                     alert("invalid Login");
                 });
             }
         }
-    });
-angular.module("companyModule")
-    .controller("logoutController",function($scope,$window,$http){
-        $scope.logout = function(){
-            $http.post("/placements/logout").then(function(){
-                $window.location.href = "home.html";
-            });
-        }
-    });
-angular.module("companyModule")
+    }]);
+angular.module("studentModule")
     .controller("changePasswordController",function($scope,$window,$http){
         $http.get("/placements/sessionCheck").then(function(){
             /*
@@ -169,20 +172,21 @@ angular.module("studentModule")
             });
         }
     });
-angular.module("statisticsModule",[])
+angular.module("studentModule")
     .controller("statisticsController",function($scope,$window,$http){
         $http.get("/placements/placedCandidates").then(function(response){
             $scope.items = response.data;
         });
         $scope.filter = function(){
-            if($scope.yearSelected!=null){
-                $http.get("/placements/placedCandidates/"+$scope.yearSelected).then(function(response){
-                    if(response.data.length==0){
-                        alert("data not found for this year");
-                    }else{
+            $http.get("/placements/placedCandidates/"+$scope.yearSelected).then(function(response){
+                if(response.data.length==0){
+                    $http.get("/placements/placedCandidates").then(function(response){
                         $scope.items = response.data;
-                    }
-                });
-            }
+                    });
+                }else{
+                    $scope.items="";
+                    $scope.items = response.data;
+                }
+            });
         }
     });
